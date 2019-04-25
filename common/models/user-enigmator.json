@@ -1,0 +1,43 @@
+{
+  "name": "UserEnigmator",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "Classement": {
+      "type": "number"
+    },
+    "nom": {
+      "type": "string",
+      "required": true
+    },
+    "rang": {
+      "type": "string"
+    },
+    "inscription_date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "userEnigmators": {
+      "type": "hasMany",
+      "model": "UserEnigmator",
+      "foreignKey": "ouaigro",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      },
+      "through": "friends"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

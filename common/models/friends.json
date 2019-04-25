@@ -1,0 +1,28 @@
+{
+  "name": "friends",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "state": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "physician": {
+      "type": "belongsTo",
+      "model": "UserEnigmator",
+      "foreignKey": "User"
+    },
+    "patient": {
+      "type": "belongsTo",
+      "model": "UserEnigmator",
+      "foreignKey": "friend"
+    }},
+  "acls": [],
+  "methods": {}
+}

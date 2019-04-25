@@ -1,0 +1,50 @@
+{
+  "name": "History",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "type": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "userEnigmators": {
+      "type": "hasOne",
+      "model": "UserEnigmator",
+      "foreignKey": "UserID",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "enigme": {
+      "type": "belongsTo",
+      "model": "Enigme",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "userEnigmator": {
+      "type": "belongsTo",
+      "model": "UserEnigmator",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

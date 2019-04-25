@@ -1,0 +1,47 @@
+{
+  "name": "Enigme",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "question": {
+      "type": "string"
+    },
+    "reponse": {
+      "type": "string",
+      "required": true
+    },
+    "etats": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "Enigme_User": {
+      "type": "belongsTo",
+      "model": "UserEnigmator",
+      "foreignKey": "UserID",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
+    },
+    "media": {
+      "type": "hasOne",
+      "model": "Media",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -6,7 +6,7 @@
     "database": "enigmator",
     "password": "password",
     "name": "mysql",
-    "user": "root",
+    "user": "enigmator",
     "connector": "mysql"
   },
   "db": {

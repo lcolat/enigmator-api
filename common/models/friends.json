@@ -13,15 +13,15 @@
   },
   "validations": [],
   "relations": {
-    "physician": {
+    "FROM": {
       "type": "belongsTo",
       "model": "UserEnigmator",
-      "foreignKey": "User"
+      "foreignKey": "ID_FROM"
     },
-    "patient": {
+    "TO": {
       "type": "belongsTo",
       "model": "UserEnigmator",
-      "foreignKey": "friend"
+      "foreignKey": "ID_TO"
     }
   },
   "acls": [],

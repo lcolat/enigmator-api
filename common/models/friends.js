@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(Friends)  {
-  Friends.disableRemoteMethodByName('insert');
+  Friends.disableRemoteMethodByName('create');
   Friends.prototype.SendFriendRequest = function(id, options, callback) {
     // TODO
     const token = options && options.accessToken;

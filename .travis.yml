@@ -1,14 +1,12 @@
 language: node_js
 node_js:
-  - "lts/*"
+  - 'lts/*'
 
-before_install:
-  - cd app
 install:
   - npm install
 
-script:
-  - npm run test:unit
+test:
+  - npm run posttest
 
 notifications:
   email:

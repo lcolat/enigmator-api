@@ -24,6 +24,47 @@
       "foreignKey": "ID_TO"
     }
   },
-  "acls": [],
-  "methods": {}
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {
+    "prototype.SendFriendRequest": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {"arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"}
+      ],
+      "returns": [],
+      "description": "Add a friend",
+      "http": [
+        {
+          "path": "/AddAfriend",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

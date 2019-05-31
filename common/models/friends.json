@@ -13,16 +13,58 @@
   },
   "validations": [],
   "relations": {
-    "physician": {
+    "FROM": {
       "type": "belongsTo",
       "model": "UserEnigmator",
-      "foreignKey": "User"
+      "foreignKey": "ID_FROM"
     },
-    "patient": {
+    "TO": {
       "type": "belongsTo",
       "model": "UserEnigmator",
-      "foreignKey": "friend"
-    }},
-  "acls": [],
-  "methods": {}
+      "foreignKey": "ID_TO"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {
+    "prototype.SendFriendRequest": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {"arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"}
+      ],
+      "returns": [],
+      "description": "Add a friend",
+      "http": [
+        {
+          "path": "/AddAfriend",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

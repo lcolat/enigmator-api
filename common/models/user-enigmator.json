@@ -50,7 +50,67 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "AddAFriend"
+    },{
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "AcceptAFriendRequest"
     }
   ],
-  "methods": {}
+  "methods": {
+    "prototype.AddAFriend": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "id de l'amis"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [],
+      "description": "Ajouter un amis",
+      "http": [
+        {
+          "path": "/AddAFriend",
+          "verb": "post"
+        }
+      ]
+    },
+    "prototype.AcceptAFriendRequest": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [],
+      "description": "Accept a friend Request",
+      "http": [
+        {
+          "path": "/AcceptAFriendRequest",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

@@ -68,6 +68,7 @@ module.exports = function(Userenigmator) {
               statusCode: 404,
               message: "La requète n'existe pas",
             };
+            callback(result);
           } else {
             var validateRequest = {
               state: 'accepted',
@@ -84,6 +85,61 @@ module.exports = function(Userenigmator) {
           }
           callback(result);
         });
+      }
+      if (userId === id) {
+        result = {
+          statusCode: 422,
+          message: 'Vous ne pouvez pas vous ajouter vous même en amis',
+        };
+        callback(result);
+      }
+    });
+  };
+  Userenigmator.prototype.DenyAFriendRequest = function(id, options, callback) {
+    var app = Userenigmator.app;
+    var Friends = app.models.Friends;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    var result = {};
+
+    Userenigmator.findById(id, function(err, friend) {
+      if (friend !== undefined && userId !== id) {
+        var friendRequest = {
+          state: 'request',
+          ID_FROM: id,
+          ID_TO: userId,
+        };
+        Friends.find({where: friendRequest}, function(err, models) {
+          console.log(models);
+          if (models.length === 0) {
+            result = {
+              statusCode: 404,
+              message: "La requète n'existe pas",
+            };
+            callback(result);
+          } else {
+            var validateRequest = {
+              state: 'denyed',
+              ID_FROM: id,
+              ID_TO: userId,
+            };
+            Friends.upsertWithWhere(friendRequest, validateRequest, function(err, models) {
+              result = {
+                statusCode: 200,
+                message: "La requète d'amis a été refusée",
+              };
+              callback(result);
+            });
+          }
+        });
+      }
+      if (userId === id) {
+        result = {
+          statusCode: 422,
+          message: 'Vous ne pouvez pas vous ajouter vous même en amis',
+        };
+        callback(result);
       }
     });
   };

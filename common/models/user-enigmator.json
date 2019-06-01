@@ -63,6 +63,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "AcceptAFriendRequest"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "DenyAFriendRequest"
     }
   ],
   "methods": {
@@ -111,6 +118,30 @@
           "verb": "post"
         }
       ]
+    },
+    "prototype.DenyAFriendRequest": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [],
+      "description": "Deny a friend Request",
+      "http": [
+        {
+          "path": "/DenyAFriendRequest",
+          "verb": "post"
+        }
+      ]
     }
+
   }
 }

@@ -35,7 +35,8 @@
         "nestRemoting": true,
         "disableInclude": true
       },
-      "through": "friends"
+      "through": "friends",
+      "keyThrough": "ID_FROM"
     }
   },
   "acls": [
@@ -57,7 +58,8 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "AddAFriend"
-    },{
+    },
+    {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$authenticated",
@@ -70,6 +72,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "DenyAFriendRequest"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "GetMyFriend"
     }
   ],
   "methods": {
@@ -141,7 +150,23 @@
           "verb": "post"
         }
       ]
+    },
+    "GetMyFriend": {
+      "accepts": [
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [],
+      "description": "Affiche la liste des amis",
+      "http": [
+        {
+          "path": "/GetMyFriend",
+          "verb": "get"
+        }
+      ]
     }
-
   }
 }

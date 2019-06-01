@@ -82,8 +82,8 @@ module.exports = function(Userenigmator) {
                 message: "La requète d'amis a deja été accepté",
               };
             });
+            callback(result);
           }
-          callback(result);
         });
       }
       if (userId === id) {
@@ -141,6 +141,49 @@ module.exports = function(Userenigmator) {
         };
         callback(result);
       }
+    });
+  };
+
+  Userenigmator.GetMyFriend = function(options, callback) {
+    var app = Userenigmator.app;
+    var Friends = app.models.Friends;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    var result = {};
+    var friendRequest = {
+      state: 'accepted',
+      ID_FROM: userId,
+    };
+    var MyfriendRequest = {
+      state: 'accepted',
+      ID_TO: userId,
+    };
+
+    Friends.find({where: friendRequest}, function(err, friendsPart1) {
+      Friends.find({where: MyfriendRequest}, function(err, friendsPart2) {
+        console.log(friendsPart1);
+        console.log(friendsPart2);
+        var userArray = [];
+        friendsPart1.forEach(function(element) {
+          userArray.push({id: element['id']});
+        });
+        friendsPart2.forEach(function(element) {
+          userArray.push({id: element['id']});
+        });
+        var research = {
+          where: {
+            or: userArray,
+          },
+        };
+        Userenigmator.find(research, function(err, resultReq) {
+          result = {
+            result: resultReq,
+            statusCode: '200',
+          };
+          callback(result);
+        });
+      });
     });
   };
 };

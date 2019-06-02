@@ -13,11 +13,11 @@
     "question": {
       "type": "string"
     },
-    "reponse": {
+    "anwser": {
       "type": "string",
       "required": true
     },
-    "etats": {
+    "status": {
       "type": "boolean",
       "required": true
     }

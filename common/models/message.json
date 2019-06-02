@@ -15,7 +15,17 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "topic": {
+      "type": "belongsTo",
+      "model": "Topic",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
+    }
+  },
   "acls": [
     {
       "accessType": "READ",

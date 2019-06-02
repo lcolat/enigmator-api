@@ -53,9 +53,11 @@
           "required": true,
           "description": "ID of the friend wanted"
         },
-        {"arg": "options",
+        {
+          "arg": "options",
           "type": "object",
-          "http": "optionsFromRequest"}
+          "http": "optionsFromRequest"
+        }
       ],
       "returns": [],
       "description": "Add a friend",

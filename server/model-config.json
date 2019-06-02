@@ -59,5 +59,9 @@
   "friends": {
     "dataSource": "mysql",
     "public": true
+  },
+  "Topic": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

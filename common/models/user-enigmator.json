@@ -10,19 +10,28 @@
       "type": "number",
       "required": true
     },
-    "Classement": {
+    "rank": {
       "type": "number"
     },
-    "nom": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
       "type": "string",
       "required": true
     },
     "rang": {
       "type": "string"
+    },"type":{
+      "type":"string"
     },
-    "inscription_date": {
+    "creationDate": {
       "type": "date",
       "required": true
+    },
+    "country":{
+      "type":"string"
     }
   },
   "validations": [],

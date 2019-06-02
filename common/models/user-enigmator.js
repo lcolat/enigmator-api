@@ -13,7 +13,7 @@ module.exports = function(Userenigmator) {
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
     var result = {};
-
+    var err = {};
     if (userId !== id) {
       var friendRequest = {
         state: 'request',
@@ -21,28 +21,28 @@ module.exports = function(Userenigmator) {
         ID_TO: id,
       };
       Friends.find({where: friendRequest}, function(err, models) {
-        console.log(models);
         if (models.length === 0) {
           Friends.create(friendRequest);
           result = {
             statusCode: 200,
-            message: "La requète d'amis à été créer",
+            status: "La requète d'amis à été créer",
           };
+          callback(null, result);
         } else {
-          result = {
+          err = {
             statusCode: 422,
             message: "La requète d'amis a déja été envoyé",
           };
+          callback(err);
         }
-        callback(result);
       });
     }
     if (userId === id) {
-      result = {
+      err = {
         statusCode: 422,
         message: 'Vous ne pouvez pas vous ajouter vous même en amis',
       };
-      callback(result);
+      callback(err);
     }
   };
 
@@ -65,10 +65,10 @@ module.exports = function(Userenigmator) {
           console.log(models);
           if (models.length === 0) {
             result = {
-              statusCode: 404,
-              message: "La requète n'existe pas",
+              statusCode: '404',
+              message: "Cette requète n'existe pas",
             };
-            callback(result);
+            callback(null, result);
           } else {
             var validateRequest = {
               state: 'accepted',
@@ -82,7 +82,7 @@ module.exports = function(Userenigmator) {
                 message: "La requète d'amis a deja été accepté",
               };
             });
-            callback(result);
+            callback(null, result);
           }
         });
       }
@@ -117,7 +117,7 @@ module.exports = function(Userenigmator) {
               statusCode: 404,
               message: "La requète n'existe pas",
             };
-            callback(result);
+            callback(null, result);
           } else {
             var validateRequest = {
               state: 'denyed',
@@ -129,7 +129,7 @@ module.exports = function(Userenigmator) {
                 statusCode: 200,
                 message: "La requète d'amis a été refusée",
               };
-              callback(result);
+              callback(null, result);
             });
           }
         });
@@ -177,11 +177,17 @@ module.exports = function(Userenigmator) {
           },
         };
         Userenigmator.find(research, function(err, resultReq) {
-          result = {
-            result: resultReq,
-            statusCode: '200',
-          };
-          callback(result);
+          if (resultReq.length === 0) {
+            result = {
+              statusCode: '204',
+            };
+          } else {
+            result = {
+              result: resultReq,
+              statusCode: '200',
+            };
+          }
+          callback(null, result);
         });
       });
     });

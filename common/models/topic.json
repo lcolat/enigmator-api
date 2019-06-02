@@ -1,0 +1,41 @@
+{
+  "name": "Topic",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "creationDate": {
+      "type": "date",
+      "required": true
+    },
+    "titre":{
+      "type" : "date",
+      "required":true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "enigmes": {
+      "type": "hasOne",
+      "model": "Enigme",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
+    },
+    "userEnigmators": {
+      "type": "hasOne",
+      "model": "UserEnigmator",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

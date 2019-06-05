@@ -19,7 +19,16 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "containers": {
+      "type": "hasOne",
+      "model": "Container",
+      "foreignKey": "",
+      "options": {
+        "disableInclude": true
+      }
+    }
+  },
   "acls": [],
   "methods": {}
 }

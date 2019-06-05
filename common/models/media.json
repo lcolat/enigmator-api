@@ -10,7 +10,7 @@
       "type": "number",
       "required": true
     },
-    "path": {
+    "media": {
       "type": "string",
       "required": true
     },

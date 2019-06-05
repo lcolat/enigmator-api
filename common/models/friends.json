@@ -22,7 +22,8 @@
       "type": "belongsTo",
       "model": "UserEnigmator",
       "foreignKey": "friend"
-    }},
+    }
+  },
   "acls": [],
   "methods": {}
 }

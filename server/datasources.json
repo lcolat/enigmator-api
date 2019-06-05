@@ -6,11 +6,18 @@
     "database": "enigmator",
     "password": "password",
     "name": "mysql",
-    "user": "root",
+    "user": "enigmator",
     "connector": "mysql"
   },
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "MediaEnigme": {
+    "name": "MediaEnigme",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./files"
   }
 }
+

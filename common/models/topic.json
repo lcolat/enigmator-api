@@ -10,8 +10,8 @@
       "type": "date",
       "required": true
     },
-    "titre":{
-      "type" : "date",
+    "title":{
+      "type" : "string",
       "required":true
     }
   },
@@ -27,7 +27,7 @@
       }
     },
     "userEnigmators": {
-      "type": "hasOne",
+      "type": "belongsTo",
       "model": "UserEnigmator",
       "foreignKey": "",
       "options": {

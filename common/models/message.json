@@ -24,6 +24,15 @@
         "nestRemoting": true,
         "disableInclude": true
       }
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "UserEnigmator",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
     }
   },
   "acls": [

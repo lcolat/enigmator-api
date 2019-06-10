@@ -21,10 +21,11 @@
   "validations": [],
   "relations": {
     "containers": {
-      "type": "hasOne",
+      "type": "belongsTo",
       "model": "Container",
-      "foreignKey": "path",
+      "foreignKey": "ContainerID",
       "options": {
+        "nestRemoting": true,
         "disableInclude": true
       },
       "required" : true

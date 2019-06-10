@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "start": "node .",
     "posttest": "npm run lint",
-    "migration" : "node ./server/migdb.js"
+    "migration": "node ./server/migdb.js"
   },
   "dependencies": {
     "compression": "^1.0.3",

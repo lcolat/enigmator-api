@@ -23,10 +23,11 @@
     "containers": {
       "type": "hasOne",
       "model": "Container",
-      "foreignKey": "",
+      "foreignKey": "path",
       "options": {
         "disableInclude": true
-      }
+      },
+      "required" : true
     }
   },
   "acls": [],

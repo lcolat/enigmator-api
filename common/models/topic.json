@@ -37,5 +37,27 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": { "prototype.PostAMessage": {
+    "accepts": [
+      {
+        "arg": "content",
+        "type": "string",
+        "required": true,
+        "description": "contenus du message"
+      },
+      {
+        "arg": "options",
+        "type": "object",
+        "http": "optionsFromRequest"
+      }
+    ],
+    "returns": [],
+    "description": "Ajouter un amis",
+    "http": [
+      {
+        "path": "/PostAMessage",
+        "verb": "post"
+      }
+    ]
+  }}
 }

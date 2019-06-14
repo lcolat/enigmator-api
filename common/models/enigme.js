@@ -5,7 +5,8 @@ module.exports = function(Enigme) {
 
   Enigme.prototype.AnswerEnigme = function(id, answer, options ,callback) {
     // TODO
-    var app = Enigme.app
+    var now = new Date() ;
+    var app = Enigme.app;
     var UserEnigmator = app.models.UserEnigmator;
     var History = app.models.History;
     const token = options && options.accessToken;
@@ -13,10 +14,7 @@ module.exports = function(Enigme) {
     const user = userId ? 'user#' + userId : '<anonymous>';
     var result ;
     Enigme.findById(id,{},function(err,enigme){
-      console.log(enigme);
-      console.log(answer);
-      //TODO CHANGE TYPE ANWSER
-      if(answer === enigme['anwser'] ){
+      if(answer === enigme['answer'] ){
          result = {
           message : 'bonne réponse ! ',
         };
@@ -24,10 +22,19 @@ module.exports = function(Enigme) {
             userEnigmatorId : user,
             enigmeId : id ,
             type : 'success',
-           date : now.toJSON()
+            date : now.toJSON()
          };
          History.create(userHistory);
-        callback(null,result);
+         //TODO ADD THE SCORE TO USER RANK
+        UserEnigmator.findById(userId,{},function(err,userData){
+          userData['rank'] += enigme['scoreReward'];
+          UserEnigmator.upsert(userData,function(err,obj){
+
+            callback(null,result);
+          });
+        });
+        UserEnigmator.upsert()
+         callback(null,result);
       }else{
         result = {
           message : 'mauvaise réponse ! ',

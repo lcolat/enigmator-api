@@ -13,13 +13,17 @@
     "question": {
       "type": "string"
     },
-    "anwser": {
+    "answer": {
       "type": "string",
       "required": true
     },
     "status": {
       "type": "boolean",
       "required": true
+    },
+    "scoreReward" :{
+      "type" : "number",
+      "default" : 0
     }
   },
   "validations": [],

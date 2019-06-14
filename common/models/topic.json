@@ -36,7 +36,15 @@
       }
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY",
+      "property": "PostAMessage"
+    }
+  ],
   "methods": {
     "prototype.PostAMessage": {
       "accepts": [
@@ -87,10 +95,12 @@
           }
         }
       ],
-      "returns": [ {
-        "arg": "result",
-        "type": "object"
-      }],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object"
+        }
+      ],
       "description": "Get messages of a topic",
       "http": [
         {

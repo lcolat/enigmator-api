@@ -13,7 +13,7 @@ module.exports = function(Topic) {
     var result = {};
     var err = {};
     var message = {
-      content: '',
+      content: content,
       creationDate: now.toJSON(),
       userId: userId,
       topicId: id,
@@ -29,17 +29,13 @@ module.exports = function(Topic) {
   Topic.prototype.GetMessages = function(id, callback) {
     var app = Topic.app;
     var Message = app.models.Message;
-    var filter = { where : {topicId : id}};
-    Message.find(filter,callback ,function(data){
+    Message.find({where :{topicId : id}},function(err,data){
       if(data.length !== 0){
-        callback(null,data);
+        callback(null,{data: data});
       }else{
-        callback(null);
+        callback(err);
       }
     });
-
   };
-
-
 
 };

@@ -24,7 +24,7 @@ module.exports = function(Enigme) {
             userEnigmatorId : user,
             enigmeId : id ,
             type : 'success',
-           //date :
+           date : now.toJSON()
          };
          History.create(userHistory);
         callback(null,result);

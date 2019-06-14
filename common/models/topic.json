@@ -10,9 +10,9 @@
       "type": "date",
       "required": true
     },
-    "title":{
-      "type" : "string",
-      "required":true
+    "title": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
@@ -37,27 +37,38 @@
     }
   },
   "acls": [],
-  "methods": { "prototype.PostAMessage": {
-    "accepts": [
-      {
-        "arg": "content",
-        "type": "string",
-        "required": true,
-        "description": "contenus du message"
-      },
-      {
-        "arg": "options",
-        "type": "object",
-        "http": "optionsFromRequest"
-      }
-    ],
-    "returns": [],
-    "description": "Ajouter un amis",
-    "http": [
-      {
-        "path": "/PostAMessage",
-        "verb": "post"
-      }
-    ]
-  }}
+  "methods": {
+    "prototype.PostAMessage": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "content",
+          "type": "string",
+          "required": true,
+          "description": "contenus du message"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [{"arg":"result","type":"object"}],
+      "description": "Ajouter un amis",
+      "http": [
+        {
+          "path": "/PostAMessage",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

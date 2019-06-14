@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = function(Topic) {
-  Topic.prototype.PostAMessage = function(id, options, callback) {
+
+  Topic.prototype.PostAMessage = function(id,content, options, callback) {
     // TODO
     var now = new Date();
     var app = Topic.app;
@@ -20,7 +21,7 @@ module.exports = function(Topic) {
     Message.create(message);
     result = {
       statusCode: 200,
-      status: "La requète d'amis à été créer",
+      status: "Le message est posté",
     };
     callback(null, result);
   };

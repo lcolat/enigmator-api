@@ -61,11 +61,40 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{"arg":"result","type":"object"}],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object"
+        }
+      ],
       "description": "Ajouter un amis",
       "http": [
         {
           "path": "/PostAMessage",
+          "verb": "post"
+        }
+      ]
+    },
+    "prototype.GetMessages": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "idTopic",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": [ {
+        "arg": "result",
+        "type": "object"
+      }],
+      "description": "Get messages of a topic",
+      "http": [
+        {
+          "path": "/GetMessages",
           "verb": "post"
         }
       ]

@@ -25,4 +25,21 @@ module.exports = function(Topic) {
     };
     callback(null, result);
   };
+
+  Topic.prototype.GetMessages = function(id, callback) {
+    var app = Topic.app;
+    var Message = app.models.Message;
+    var filter = { where : {topicId : id}};
+    Message.find(filter,callback ,function(data){
+      if(data.length !== 0){
+        callback(null,data);
+      }else{
+        callback(null);
+      }
+    });
+
+  };
+
+
+
 };

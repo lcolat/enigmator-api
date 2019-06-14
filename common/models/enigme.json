@@ -62,5 +62,37 @@
       "permission": "DENY"
     }
   ],
-  "methods": {}
+  "methods": {
+    "prototype.AnswerEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "answer",
+          "type": "string",
+          "required": true,
+          "description": "The answer provided by the user"
+        }, {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [{"args":"result" , "type" :"object"}],
+      "description": "Answer to an Enigme ",
+      "http": [
+        {
+          "path": "/AnswerEnigme",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

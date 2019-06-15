@@ -59,5 +59,13 @@
   "friends": {
     "dataSource": "mysql",
     "public": true
+  },
+  "Container": {
+    "dataSource": "storage",
+    "public":true
+  },
+  "Topic": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

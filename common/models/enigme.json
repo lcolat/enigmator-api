@@ -38,11 +38,12 @@
       }
     },
     "media": {
-      "type": "hasOne",
+      "type": "belongsTo",
       "model": "Media",
-      "foreignKey": "",
+      "foreignKey": "MediaID",
       "options": {
-        "nestRemoting": true
+        "nestRemoting": true,
+        "disableInclude": true
       }
     }
   },

@@ -44,5 +44,29 @@
       "permission": "DENY"
     }
   ],
-  "methods": {}
+  "methods": {
+    "prototype.SendFriendRequest": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [],
+      "description": "Add a friend",
+      "http": [
+        {
+          "path": "/AddAfriend",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

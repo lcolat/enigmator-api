@@ -40,7 +40,7 @@
     "userEnigmators": {
       "type": "hasMany",
       "model": "UserEnigmator",
-      "foreignKey": "ouaigro",
+      "foreignKey": "",
       "options": {
         "nestRemoting": true,
         "disableInclude": true

@@ -1,0 +1,450 @@
+{
+	"info": {
+		"_postman_id": "bef5c63d-0b0e-48e7-a432-ce81bd2b8948",
+		"name": "Enigmator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create account 1 Diego",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"rank\": 0,\r\n  \"firstName\": \"diego\",\r\n  \"lastName\" : \"ouai\",\r\n  \"type\" : \"user\",\r\n  \"creationDate\": \"2019-05-08T19:23:42.366Z\",\r\n  \"realm\": \"string\",\r\n  \"username\": \"diego972\",\r\n  \"email\": \"diego@bg.fr\",\r\n  \"emailVerified\": false,\r\n  \"UserID\": 0,\r\n  \"password\":\"bendo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create account 2  popo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"rank\": 0,\r\n  \"firstName\": \"popo\",\r\n  \"lastName\" :\"bendo\",\r\n  \"type\": \"user\",\r\n  \"inscription_date\": \"2019-05-08T19:23:42.366Z\",\r\n  \"realm\": \"string\",\r\n  \"username\": \"popo\",\r\n  \"email\": \"popo@bg.fr\",\r\n  \"emailVerified\": false,\r\n  \"UserID\": 0,\r\n  \"password\":\"bendo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create account 3  Theo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Classement\": 0,\r\n  \"nom\": \"theo\",\r\n  \"rang\": \"string\",\r\n  \"inscription_date\": \"2019-05-08T19:23:42.366Z\",\r\n  \"realm\": \"string\",\r\n  \"username\": \"theo\",\r\n  \"email\": \"theo@bg.fr\",\r\n  \"emailVerified\": false,\r\n  \"UserID\": 0,\r\n  \"password\":\"bendo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Connection Diego",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "diego",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\" : \"diego972\",\n\"password\" : \"bendo\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators",
+						"login"
+					]
+				},
+				"description": "popo connection\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Connection Popo",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "diego",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\" : \"popo\",\n\"password\" : \"bendo\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators",
+						"login"
+					]
+				},
+				"description": "popo connection\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Connection Theo",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "diego",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\" : \"theo\",\n\"password\" : \"bendo\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators",
+						"login"
+					]
+				},
+				"description": "popo connection\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Friend",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JB3olCuAdHXoKMHtYrK7VRALc5qrcwYoEPOy8qq7WoYzxp8Vmez7sjv4eLBGWBgY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators/2/AddAfriend",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators",
+						"2",
+						"AddAfriend"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AcceptRequest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JB3olCuAdHXoKMHtYrK7VRALc5qrcwYoEPOy8qq7WoYzxp8Vmez7sjv4eLBGWBgY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators/1/AcceptAFriendRequest",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators",
+						"1",
+						"AcceptAFriendRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deny Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators/1/DenyAFriendRequest",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators",
+						"1",
+						"DenyAFriendRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get enigme",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "t38s8rv5vEk9M59TEshmTNWj8gt6LbdI5rzpq9B7uWeFGHeA5ABN2pf1UBAQaHG9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/Enigmes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Enigmes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserenigmator",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "t38s8rv5vEk9M59TEshmTNWj8gt6LbdI5rzpq9B7uWeFGHeA5ABN2pf1UBAQaHG9",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMyFriend",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "V7jQRhzWqzv9X7OOuex3bZismJUXLGwtpkTODrnv8qdnc9DjvpKM7mxgG7e7XVSP",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/UserEnigmators/GetMyFriend",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"UserEnigmators",
+						"GetMyFriend"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

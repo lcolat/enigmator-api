@@ -10,26 +10,25 @@
       "type": "number",
       "required": true
     },
-    "media": {
-      "type": "string",
-      "required": true
-    },
     "type": {
       "type": "string"
+    },
+    "filename":{
+      "type":"string",
+      "required":true
     }
   },
   "validations": [],
   "relations": {
-    "containers": {
-      "type": "belongsTo",
-      "model": "Container",
-      "foreignKey": "ContainerID",
-      "options": {
-        "nestRemoting": true,
-        "disableInclude": true
-      },
-      "required" : true
+  "media": {
+    "type": "belongsTo",
+    "model": "Enigme",
+    "foreignKey": "enigmeID",
+    "options": {
+      "nestRemoting": true,
+      "disableInclude": true
     }
+  }
   },
   "acls": [],
   "methods": {}

@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "lts/*"
+
+before_install:
+  - cd app
+install:
+  - npm install
+
+script:
+  - npm run test:unit
+
+notifications:
+  email:
+    recipients:
+      - loic.colat@gmail.com
+    on_success: never
+    on_failure: always

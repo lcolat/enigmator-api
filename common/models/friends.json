@@ -13,17 +13,36 @@
   },
   "validations": [],
   "relations": {
-    "physician": {
+    "FROM": {
       "type": "belongsTo",
       "model": "UserEnigmator",
-      "foreignKey": "User"
+      "foreignKey": "ID_FROM"
     },
-    "patient": {
+    "TO": {
       "type": "belongsTo",
       "model": "UserEnigmator",
-      "foreignKey": "friend"
+      "foreignKey": "ID_TO"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
   "methods": {}
 }

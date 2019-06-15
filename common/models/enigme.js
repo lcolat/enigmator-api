@@ -14,6 +14,14 @@ module.exports = function(Enigme) {
     const user = userId ? 'user#' + userId : '<anonymous>';
     var result;
     Enigme.findById(id, {}, function(err, enigme) {
+      console.log(enigme)
+      if (enigme.status === false) {
+        result = {
+          message: 'vous ne pouvez pas repondre a cette enigme',
+        };
+        callback(null, result);
+        return;
+      }
       if (answer === enigme['answer']) {
         result = {
           message: 'bonne réponse ! ',

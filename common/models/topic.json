@@ -1,0 +1,113 @@
+{
+  "name": "Topic",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "creationDate": {
+      "type": "date",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "enigmes": {
+      "type": "hasOne",
+      "model": "Enigme",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
+    },
+    "userEnigmators": {
+      "type": "belongsTo",
+      "model": "UserEnigmator",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY",
+      "property": "PostAMessage"
+    }
+  ],
+  "methods": {
+    "prototype.PostAMessage": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "content",
+          "type": "string",
+          "required": true,
+          "description": "contenus du message"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object"
+        }
+      ],
+      "description": "Ajouter un amis",
+      "http": [
+        {
+          "path": "/PostAMessage",
+          "verb": "post"
+        }
+      ]
+    },
+    "prototype.GetMessages": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "idTopic",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object"
+        }
+      ],
+      "description": "Get messages of a topic",
+      "http": [
+        {
+          "path": "/GetMessages",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}

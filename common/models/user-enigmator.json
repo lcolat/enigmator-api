@@ -23,15 +23,16 @@
     },
     "rang": {
       "type": "string"
-    },"type":{
-      "type":"string"
+    },
+    "type": {
+      "type": "string"
     },
     "creationDate": {
       "type": "date",
       "required": true
     },
-    "country":{
-      "type":"string"
+    "country": {
+      "type": "string"
     }
   },
   "validations": [],

@@ -21,9 +21,9 @@
       "type": "boolean",
       "required": true
     },
-    "scoreReward" :{
-      "type" : "number",
-      "default" : 0
+    "scoreReward": {
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],
@@ -83,13 +83,19 @@
           "type": "string",
           "required": true,
           "description": "The answer provided by the user"
-        }, {
+        },
+        {
           "arg": "options",
           "type": "object",
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{"args":"result" , "type" :"object"}],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object"
+        }
+      ],
       "description": "Answer to an Enigme ",
       "http": [
         {
@@ -97,6 +103,30 @@
           "verb": "post"
         }
       ]
+    },
+    "CreateEnigme": {
+      "accepts": [
+        {"arg": "req", "type": "object", "http": {"source": "req"}},
+        {"arg": "res", "type": "object", "http": {"source": "res"}},
+        {
+          "arg": "data",
+          "type": "object",
+          "required": true,
+          "description": "Object with enigme attribute"
+        },
+        {
+          "arg": "file",
+          "type": null,
+          "required": false,
+          "description": "File"
+        }
+      ],
+      "returns": [],
+      "description": "Create an Enigme",
+      "http": [{
+        "path": "/CreateEnigme",
+        "verb": "post"
+      }]
     }
   }
 }

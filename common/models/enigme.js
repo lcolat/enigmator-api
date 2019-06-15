@@ -3,7 +3,7 @@
 module.exports = function(Enigme) {
   // Friends.disableRemoteMethodByName('upsert');
 
-  Enigme.prototype.AnswerEnigme = function(id, answer, options ,callback) {
+  Enigme.prototype.AnswerEnigme = function(id, answer, options, callback) {
     // TODO
     var now = new Date() ;
     var app = Enigme.app;
@@ -46,4 +46,8 @@ module.exports = function(Enigme) {
 
   };
 
+  Enigme.CreateEnigme = function(data, file, callback) {
+    // TODO
+    callback(null);
+  };
 };

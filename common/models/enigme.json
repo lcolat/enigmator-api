@@ -36,15 +36,6 @@
         "nestRemoting": true,
         "disableInclude": true
       }
-    },
-    "media": {
-      "type": "belongsTo",
-      "model": "Media",
-      "foreignKey": "MediaID",
-      "options": {
-        "nestRemoting": true,
-        "disableInclude": true
-      }
     }
   },
   "acls": [
@@ -110,13 +101,31 @@
         {"arg": "req", "type": "object", "http": {"source": "req"}},
         {"arg": "res", "type": "object", "http": {"source": "res"}},
         {
-          "arg": "data",
+          "arg": "question",
+          "type": "string",
+          "required": true,
+          "description": "question"
+        },{
+          "arg": "answer",
+          "type": "string",
+          "required": true,
+          "description": "answer"
+        },
+        {
+          "arg": "mediaType",
           "type": "string",
           "required": false,
-          "description": "Object with enigme attribute"
+          "description": "type of media"
+        },{
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
         }
       ],
-      "returns": [],
+      "returns": [{
+        "args": "result",
+        "type": "object"
+      }],
       "description": "Create an Enigme",
       "http": [{
         "path": "/CreateEnigme",

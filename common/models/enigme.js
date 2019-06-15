@@ -42,19 +42,42 @@ module.exports = function(Enigme) {
       }
     });
   };
-  Enigme.CreateEnigme = function(req, res, data, callback) {
-    console.log('coucou');
+
+  Enigme.CreateEnigme = function(req, res, question, answer, mediaType, options, callback) {
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+
     var app = Enigme.app;
-    var Container = app.models.Media;
-    // console.log(res);
-    // console.log(req);
-    Container.upload(req, res, {container: '/enigme'}, function(err, data) {
-      if  (err) {
-        callback(err);
-        console.log(err);
-      }      else  {
-        callback(err, data);
-      }
+    var Container = app.models.Container;
+    var Media = app.models.Media;
+    var enigmeToCreate = {
+      question: question,
+      answer: answer,
+      status: false,
+      UserId: userId,
+      scoreReward: 0,
+      topicId: 0,
+    };
+    //TODO CREER UN TOPIC
+    Enigme.create(enigmeToCreate, function(err, data) {
+      console.log(data);
+      Container.upload(req, res, {container: 'enigme'}, function(err, data) {
+        if  (err) {
+        } else {
+          console.log(data.files.file.name);
+          var media = {
+            type: mediaType,
+            filename: data.files.file.name,
+            enigmeId: data.id,
+          };
+          Media.create(media);
+        }
+      });
+      var result = {
+        message: 'enigme created ! ',
+      };
+      callback(null, result);
     });
   };
 };

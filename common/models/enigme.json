@@ -110,15 +110,9 @@
         {"arg": "res", "type": "object", "http": {"source": "res"}},
         {
           "arg": "data",
-          "type": "object",
-          "required": true,
-          "description": "Object with enigme attribute"
-        },
-        {
-          "arg": "file",
-          "type": null,
+          "type": "string",
           "required": false,
-          "description": "File"
+          "description": "Object with enigme attribute"
         }
       ],
       "returns": [],

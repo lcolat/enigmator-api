@@ -10,7 +10,7 @@
       "type": "number",
       "required": true
     },
-    "path": {
+    "media": {
       "type": "string",
       "required": true
     },
@@ -19,14 +19,18 @@
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
+  "relations": {
+    "containers": {
+      "type": "belongsTo",
+      "model": "Container",
+      "foreignKey": "ContainerID",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      },
+      "required" : true
     }
-  ],
+  },
+  "acls": [],
   "methods": {}
 }

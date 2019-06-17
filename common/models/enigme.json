@@ -98,14 +98,27 @@
     },
     "CreateEnigme": {
       "accepts": [
-        {"arg": "req", "type": "object", "http": {"source": "req"}},
-        {"arg": "res", "type": "object", "http": {"source": "res"}},
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        },
         {
           "arg": "question",
           "type": "string",
           "required": true,
           "description": "question"
-        },{
+        },
+        {
           "arg": "answer",
           "type": "string",
           "required": true,
@@ -116,21 +129,26 @@
           "type": "string",
           "required": false,
           "description": "type of media"
-        },{
+        },
+        {
           "arg": "options",
           "type": "object",
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{
-        "args": "result",
-        "type": "object"
-      }],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object"
+        }
+      ],
       "description": "Create an Enigme",
-      "http": [{
-        "path": "/CreateEnigme",
-        "verb": "post"
-      }]
+      "http": [
+        {
+          "path": "/CreateEnigme",
+          "verb": "post"
+        }
+      ]
     }
   }
 }

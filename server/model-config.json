@@ -62,7 +62,7 @@
   },
   "Container": {
     "dataSource": "storage",
-    "public":true
+    "public": true
   },
   "Topic": {
     "dataSource": "mysql",

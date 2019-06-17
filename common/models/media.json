@@ -13,22 +13,22 @@
     "type": {
       "type": "string"
     },
-    "filename":{
-      "type":"string",
-      "required":true
+    "filename": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-  "media": {
-    "type": "belongsTo",
-    "model": "Enigme",
-    "foreignKey": "enigmeID",
-    "options": {
-      "nestRemoting": true,
-      "disableInclude": true
+    "media": {
+      "type": "belongsTo",
+      "model": "Enigme",
+      "foreignKey": "enigmeID",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
     }
-  }
   },
   "acls": [],
   "methods": {}

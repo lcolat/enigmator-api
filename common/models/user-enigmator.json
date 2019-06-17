@@ -89,6 +89,12 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "GetMyFriend"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
     }
   ],
   "methods": {

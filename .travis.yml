@@ -6,17 +6,16 @@ install:
   - npm install
   # - npm run posttest
 deploy:
-  on:
-    all_branches: true
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     local_dir: dpl_cd_upload
     skip_cleanup: true
-    on: &2
-      repo: enigmator/enigmator
+    on:
+      all_branches: true
     bucket: enigmator-storage
     region: eu-west-3
+
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
@@ -26,7 +25,8 @@ deploy:
     application: enigmator
     deployment_group: DeployEnigmator
     region: eu-west-3
-    on: *2
+    on:
+      all_branches: true
 
 script:
   - zip -r latest *

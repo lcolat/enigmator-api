@@ -1,7 +1,7 @@
-# version: 0.0
+version: 0.0
 
-# os: linux
+os: linux
 
-# files:
-#   - source: ./
-#     destination: /home/ubuntu/enigmator/enigmator-api
+files:
+  - source: ./
+    destination: /home/ubuntu/enigmator/enigmator-api

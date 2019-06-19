@@ -20,7 +20,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: enigmator-storage
-    key: latest.zip
+    key: latest-api.zip
     bundle_type: zip
     application: enigmator
     deployment_group: DeployEnigmator
@@ -29,9 +29,9 @@ deploy:
       all_branches: true
 
 script:
-  - zip -r latest *
+  - zip -r latest-api *
   - mkdir -p enigmator-api
-  - mv latest.zip enigmator-api/latest.zip
+  - mv latest-api.zip enigmator-api/latest-api.zip
 
 notifications:
   email:

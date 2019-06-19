@@ -13,7 +13,6 @@ deploy:
     skip_cleanup: true
     on:
       branch: develop
-      branch: master
     bucket: enigmator-storage
     region: eu-west-3
 
@@ -28,7 +27,6 @@ deploy:
     region: eu-west-3
     on:
       branch: develop
-      branch: master
 
 script:
   - zip -r latest-api * .* --exclude . --exclude .. --exclude *.git* --exclude node_modules/

@@ -1,0 +1,20 @@
+version: 0.0
+
+os: linux
+
+files:
+  - source: ./
+    destination: /home/ubuntu/enigmator/enigmator-api
+hooks:
+  BeforeInstall:
+    - location: scripts/beforeInstall.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/afterInstall.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/startService.sh
+      timeout: 300
+      runas: root

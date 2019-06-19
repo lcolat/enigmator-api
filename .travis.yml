@@ -29,7 +29,7 @@ deploy:
       all_branches: true
 
 script:
-  - zip -r latest-api *
+  - zip -r latest-api * .* --exclude . --exclude ..
   - mkdir -p enigmator-api
   - mv latest-api.zip enigmator-api/latest-api.zip
 

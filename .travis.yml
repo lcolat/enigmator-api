@@ -1,3 +1,7 @@
+branches:
+  only:
+    - master
+    - develop
 language: node_js
 node_js:
   - 'lts/*'
@@ -12,8 +16,7 @@ deploy:
     local_dir: enigmator-api
     skip_cleanup: true
     on:
-      branch: develop
-      branch: master
+      all_branches: true
     bucket: enigmator-storage
     region: eu-west-3
 
@@ -27,8 +30,7 @@ deploy:
     deployment_group: DeployEnigmator
     region: eu-west-3
     on:
-      branch: develop
-      branch: master
+      all_branches: true
 
 script:
   - zip -r latest-api * .* --exclude . --exclude .. --exclude *.git* --exclude node_modules/

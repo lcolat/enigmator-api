@@ -99,20 +99,6 @@
     "CreateEnigme": {
       "accepts": [
         {
-          "arg": "req",
-          "type": "object",
-          "http": {
-            "source": "req"
-          }
-        },
-        {
-          "arg": "res",
-          "type": "object",
-          "http": {
-            "source": "res"
-          }
-        },
-        {
           "arg": "question",
           "type": "string",
           "required": true,
@@ -123,12 +109,6 @@
           "type": "string",
           "required": true,
           "description": "answer"
-        },
-        {
-          "arg": "mediaType",
-          "type": "string",
-          "required": false,
-          "description": "type of media"
         },
         {
           "arg": "options",
@@ -146,6 +126,46 @@
       "http": [
         {
           "path": "/CreateEnigme",
+          "verb": "post"
+        }
+      ]
+    },
+    "prototype.AddMediaToEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object"
+        }
+      ],
+      "description": "AddMediaToEnigme",
+      "http": [
+        {
+          "path": "/AddMediaToEnigme",
           "verb": "post"
         }
       ]

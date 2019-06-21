@@ -14,7 +14,7 @@ module.exports = function(Enigme) {
     const user = userId ? 'user#' + userId : '<anonymous>';
     var result;
     Enigme.findById(id, {}, function(err, enigme) {
-      console.log(enigme)
+      console.log(enigme);
       if (enigme.status === false) {
         result = {
           message: 'vous ne pouvez pas repondre a cette enigme',
@@ -51,14 +51,11 @@ module.exports = function(Enigme) {
     });
   };
 
-  Enigme.CreateEnigme = function(req, res, question, answer, mediaType, options, callback) {
+  Enigme.CreateEnigme = function(question, answer, options, callback) {
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
 
-    var app = Enigme.app;
-    var Container = app.models.Container;
-    var Media = app.models.Media;
     var enigmeToCreate = {
       question: question,
       answer: answer,
@@ -67,25 +64,46 @@ module.exports = function(Enigme) {
       scoreReward: 0,
       topicId: 0,
     };
-    //TODO CREER UN TOPIC
+    // TODO CREER UN TOPIC
     Enigme.create(enigmeToCreate, function(err, data) {
       console.log(data);
-      Container.upload(req, res, {container: 'enigme'}, function(err, data) {
-        if  (err) {
-        } else {
-          console.log(data.files.file.name);
-          var media = {
-            type: mediaType,
-            filename: data.files.file.name,
-            enigmeId: data.id,
-          };
-          Media.create(media);
-        }
-      });
       var result = {
         message: 'enigme created ! ',
       };
       callback(null, result);
+    });
+  };
+  Enigme.prototype.AddMediaToEnigme = function(id, req, res, callback) {
+    var app = Enigme.app;
+    var Container = app.models.Container;
+    var Media = app.models.Media;
+    var result = {};
+    Container.upload(req, res, {container: 'enigme'}, function(err, data) {
+      console.log(data);
+      if  (err) {
+      } else {
+        var namefile = data.files.file[0].name;
+        if (namefile !== undefined && data.fields.mediaType !== undefined) {
+          var media = {
+            type: data.fields.mediaType,
+            filename: namefile,
+            enigmeId: id,
+          };
+          result = {
+            message: 'Media added',
+          };
+          Media.create(media);
+          callback(null, result);
+        } else {
+          var message = '';
+          if (namefile === undefined) message += 'missing file check the name of the field |';
+          if (data.fields.mediaType === undefined) message += 'missing mediaType check the name of the field';
+          result = {
+            message: message,
+          };
+          callback(result);
+        }
+      }
     });
   };
 };

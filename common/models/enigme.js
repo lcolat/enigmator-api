@@ -124,4 +124,39 @@ module.exports = function(Enigme) {
       }
     });
   };
+
+  Enigme.prototype.ValidateEnigme = function(id, scoreReward, options, callback) {
+    var now = new Date();
+    var app = Enigme.app;
+    var UserEnigmator = app.models.UserEnigmator;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    UserEnigmator.findById(userId, {}, function(err, user) {
+      //TODO RESTRICT USER
+      /* if(user.role==='ADMIN'){
+
+      } */
+      Enigme.findById(id, {}, function(err, enigme) {
+        var enigmeBuffer = JSON.parse(JSON.stringify(enigme));
+        enigmeBuffer.status = true;
+        enigmeBuffer.scoreReward = scoreReward;
+        delete enigmeBuffer.id;
+        console.log(enigmeBuffer);
+        Enigme.replaceById(id,
+          enigmeBuffer,
+          function(err, data) {
+            if (err)
+              callback(err);
+            else {
+              console.log(data);
+              var result = {
+                message: 'enigme validated ! ',
+              };
+              callback(null, result);
+            }
+          });
+      });
+    });
+  };
 };

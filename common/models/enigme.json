@@ -181,6 +181,43 @@
           "verb": "post"
         }
       ]
+    },
+    "prototype.ValidateEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "scoreReward",
+          "type": "number",
+          "required": true,
+          "description": "The score Reward will yield the enigme"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object"
+        }
+      ],
+      "description": "Admin validate an enigme and add the scoreReward ",
+      "http": [
+        {
+          "path": "/ValidateEnigme",
+          "verb": "patch"
+        }
+      ]
     }
   }
 }

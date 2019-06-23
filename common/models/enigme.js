@@ -51,7 +51,7 @@ module.exports = function(Enigme) {
     });
   };
 
-  Enigme.CreateEnigme = function(question, answer, options, callback) {
+  Enigme.CreateEnigme = function(question, answer, name, options, callback) {
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
@@ -63,6 +63,7 @@ module.exports = function(Enigme) {
       UserId: userId,
       scoreReward: 0,
       topicId: 0,
+      name: name,
     };
     // TODO CREER UN TOPIC
     Enigme.create(enigmeToCreate, function(err, data) {
@@ -87,7 +88,7 @@ module.exports = function(Enigme) {
           var media = {
             type: data.fields.mediaType,
             filename: namefile,
-            enigmeId: id,
+            enigmeID: id,
           };
           result = {
             message: 'Media added',

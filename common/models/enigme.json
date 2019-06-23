@@ -17,6 +17,15 @@
     "question": {
       "type": "string"
     },
+    "likes":{
+      "type": "number",
+      "default": "0"
+    },
+    "creationDate": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
+    },
     "answer": {
       "type": "string",
       "required": true

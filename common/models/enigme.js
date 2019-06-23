@@ -55,24 +55,40 @@ module.exports = function(Enigme) {
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
+    var now = new Date();
+    var app = Enigme.app;
+    var Container = app.models.Container;
+    var Topic = app.models.Topic;
 
-    var enigmeToCreate = {
-      question: question,
-      answer: answer,
-      status: false,
-      UserId: userId,
-      scoreReward: 0,
-      topicId: 0,
-      name: name,
+    var topicName = 'Topic sur ' + name;
+    var topic = {
+      creationDate: now.toJSON(),
+      title: topicName,
+      userEnigmatorsId: userId,
     };
-    // TODO CREER UN TOPIC
-    Enigme.create(enigmeToCreate, function(err, data) {
-      console.log(data);
-      var result = {
-        message: 'enigme created ! ',
-        id: data.id,
+    Topic.create(topic, function(err, dataTopic) {
+      var enigmeToCreate = {
+        question: question,
+        answer: answer,
+        status: false,
+        UserID: userId,
+        scoreReward: 0,
+        topicId: dataTopic.id,
+        name: name,
       };
-      callback(null, result);
+      enigmeToCreate.topicId = dataTopic.id;
+      Enigme.create(enigmeToCreate, function(err, data) {
+        if (err) {
+          Topic.destroyById(dataTopic.id);
+          callback(err);
+        } else {
+          var result = {
+            message: 'enigme created ! ',
+            id: data.id,
+          };
+          callback(null, result);
+        }
+      });
     });
   };
   Enigme.prototype.AddMediaToEnigme = function(id, req, res, callback) {

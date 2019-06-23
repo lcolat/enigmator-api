@@ -13,6 +13,7 @@ module.exports = function(Enigme) {
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
     var result;
+    var addRank = false;
     Enigme.findById(id, {}, function(err, enigme) {
       console.log(enigme);
       if (enigme.status === false) {
@@ -26,21 +27,31 @@ module.exports = function(Enigme) {
         result = {
           message: 'bonne réponse ! ',
         };
+        console.log(user);
+        var enigmeDone = {
+          userEnigmatorId: userId,
+          enigmeId: id,
+          type: 'success',
+        };
+        History.find({where: enigmeDone}, function(err, data) {
+          if (data.length === 0){
+            addRank = true;
+          }
+          UserEnigmator.findById(userId, {}, function(err, userData) {
+            if (addRank === true) {
+              userData['rank'] += enigme['scoreReward'];
+            }
+            UserEnigmator.upsert(userData, function(err, obj) {
+            });
+          });
+        });
         var userHistory = {
-          userEnigmatorId: user,
+          userEnigmatorId: userId,
           enigmeId: id,
           type: 'success',
           date: now.toJSON(),
         };
         History.create(userHistory);
-         // TODO ADD THE SCORE TO USER RANK
-        UserEnigmator.findById(userId, {}, function(err, userData) {
-          userData['rank'] += enigme['scoreReward'];
-          UserEnigmator.upsert(userData, function(err, obj) {
-            callback(null, result);
-          });
-        });
-        UserEnigmator.upsert();
         callback(null, result);
       } else {
         result = {
@@ -133,7 +144,7 @@ module.exports = function(Enigme) {
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
     UserEnigmator.findById(userId, {}, function(err, user) {
-      //TODO RESTRICT USER
+      // TODO RESTRICT USER
       /* if(user.role==='ADMIN'){
 
       } */

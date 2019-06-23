@@ -19,7 +19,7 @@
     },
     "likes":{
       "type": "number",
-      "default": "0"
+      "default": 0
     },
     "creationDate": {
       "type": "date",
@@ -225,6 +225,37 @@
         {
           "path": "/ValidateEnigme",
           "verb": "patch"
+        }
+      ]
+    },
+    "prototype.LikeEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object"
+        }
+      ],
+      "description": "User like an Enigme",
+      "http": [
+        {
+          "path": "/LikeEnigme",
+          "verb": "post"
         }
       ]
     }

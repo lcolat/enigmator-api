@@ -70,6 +70,7 @@ module.exports = function(Enigme) {
       console.log(data);
       var result = {
         message: 'enigme created ! ',
+        id: data.id,
       };
       callback(null, result);
     });

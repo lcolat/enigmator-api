@@ -128,8 +128,9 @@
       ],
       "returns": [
         {
-          "args": "result",
-          "type": "object"
+          "arg":"result",
+          "type" :"object",
+          "root" : true
         }
       ],
       "description": "Create an Enigme",
@@ -168,8 +169,9 @@
       ],
       "returns": [
         {
-          "args": "result",
-          "type": "object"
+          "arg":"result",
+          "type" :"object",
+          "root" : true
         }
       ],
       "description": "AddMediaToEnigme",

@@ -29,7 +29,8 @@
     },
     "creationDate": {
       "type": "date",
-      "required": true
+      "required": true,
+      "default": "$now"
     },
     "country": {
       "type": "string"

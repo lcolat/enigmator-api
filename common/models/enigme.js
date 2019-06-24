@@ -13,6 +13,7 @@ module.exports = function(Enigme) {
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
     var result;
+    var addRank = false;
     Enigme.findById(id, {}, function(err, enigme) {
       console.log(enigme);
       if (enigme.status === false) {
@@ -26,21 +27,31 @@ module.exports = function(Enigme) {
         result = {
           message: 'bonne réponse ! ',
         };
+        console.log(user);
+        var enigmeDone = {
+          userEnigmatorId: userId,
+          enigmeId: id,
+          type: 'success',
+        };
+        History.find({where: enigmeDone}, function(err, data) {
+          if (data.length === 0) {
+            addRank = true;
+          }
+          UserEnigmator.findById(userId, {}, function(err, userData) {
+            if (addRank === true) {
+              userData['rank'] += enigme['scoreReward'];
+            }
+            UserEnigmator.upsert(userData, function(err, obj) {
+            });
+          });
+        });
         var userHistory = {
-          userEnigmatorId: user,
+          userEnigmatorId: userId,
           enigmeId: id,
           type: 'success',
           date: now.toJSON(),
         };
         History.create(userHistory);
-         // TODO ADD THE SCORE TO USER RANK
-        UserEnigmator.findById(userId, {}, function(err, userData) {
-          userData['rank'] += enigme['scoreReward'];
-          UserEnigmator.upsert(userData, function(err, obj) {
-            callback(null, result);
-          });
-        });
-        UserEnigmator.upsert();
         callback(null, result);
       } else {
         result = {
@@ -98,7 +109,7 @@ module.exports = function(Enigme) {
     var result = {};
     Container.upload(req, res, {container: 'enigme'}, function(err, data) {
       console.log(data);
-      if  (err) {
+      if (err) {
       } else {
         var namefile = data.files.file[0].name;
         if (namefile !== undefined && data.fields.mediaType !== undefined) {
@@ -133,7 +144,7 @@ module.exports = function(Enigme) {
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
     UserEnigmator.findById(userId, {}, function(err, user) {
-      //TODO RESTRICT USER
+      // TODO RESTRICT USER
       /* if(user.role==='ADMIN'){
 
       } */
@@ -157,6 +168,55 @@ module.exports = function(Enigme) {
             }
           });
       });
+    });
+  };
+
+  Enigme.prototype.LikeEnigme = function(id, options, callback) {
+    // TODO
+    var now = new Date();
+    var app = Enigme.app;
+    var UserEnigmator = app.models.UserEnigmator;
+    var History = app.models.History;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    var result;
+    var addRank = false;
+    var enigmeLiked = {
+      userEnigmatorId: userId,
+      enigmeId: id,
+      type: 'like',
+    };
+    History.find({where: enigmeLiked}, function(err, data) {
+      if (data.length === 0) {
+        Enigme.findById(id, {}, function(err, enigme) {
+          var enigmeBuffer = JSON.parse(JSON.stringify(enigme));
+          enigmeBuffer.likes = enigmeBuffer.likes + 1;
+          delete enigmeBuffer.id;
+          console.log(enigmeBuffer);
+          Enigme.replaceById(id,
+            enigmeBuffer,
+            function(err, data) {
+              if (err)
+                callback(err);
+              else {
+                console.log(data);
+                var result = {
+                  message: 'enigme liked ',
+                };
+                enigmeLiked.date = now.toJSON();
+                History.create(enigmeLiked);
+                callback(null, result);
+              }
+            });
+        });
+      } else {
+        console.log(data);
+        var result = {
+          message: 'enigme already liked ',
+        };
+        callback(null, result);
+      }
     });
   };
 };

@@ -8,11 +8,16 @@
   "properties": {
     "creationDate": {
       "type": "date",
-      "required": true
+      "required": true,
+      "default": "$now"
     },
     "title": {
       "type": "string",
       "required": true
+    },
+    "messagesCount":{
+      "type":"number",
+      "default" : 0
     }
   },
   "validations": [],

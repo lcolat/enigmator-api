@@ -19,6 +19,7 @@ module.exports = function(Topic) {
       topicId: id,
     };
     Message.create(message);
+    Topic
     result = {
       statusCode: 200,
       status: "Le message est posté",

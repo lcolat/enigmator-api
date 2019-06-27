@@ -98,7 +98,8 @@
       "returns": [
         {
           "args": "result",
-          "type": "object"
+          "type": "object",
+          "root" : true
         }
       ],
       "description": "Answer to an Enigme ",
@@ -217,7 +218,8 @@
       "returns": [
         {
           "args": "result",
-          "type": "object"
+          "type": "object",
+          "root":true
         }
       ],
       "description": "Admin validate an enigme and add the scoreReward ",
@@ -248,7 +250,8 @@
       "returns": [
         {
           "args": "result",
-          "type": "object"
+          "type": "object",
+          "root":true
         }
       ],
       "description": "User like an Enigme",

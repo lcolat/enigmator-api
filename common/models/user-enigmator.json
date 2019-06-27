@@ -208,7 +208,8 @@
       ],
       "returns": [ {
         "args": "result",
-        "type": "object"
+        "type": "object",
+        "root" : true
       }],
       "description": "Check if this user is my friend",
       "http": [

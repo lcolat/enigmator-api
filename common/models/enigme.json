@@ -98,7 +98,8 @@
       "returns": [
         {
           "args": "result",
-          "type": "object"
+          "type": "object",
+          "root" : true
         }
       ],
       "description": "Answer to an Enigme ",

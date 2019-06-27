@@ -29,7 +29,8 @@
     },
     "creationDate": {
       "type": "date",
-      "required": true
+      "required": true,
+      "default": "$now"
     },
     "country": {
       "type": "string"
@@ -40,7 +41,7 @@
     "userEnigmators": {
       "type": "hasMany",
       "model": "UserEnigmator",
-      "foreignKey": "ouaigro",
+      "foreignKey": "",
       "options": {
         "nestRemoting": true,
         "disableInclude": true
@@ -89,6 +90,19 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "GetMyFriend"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "IsFriend"
     }
   ],
   "methods": {
@@ -174,6 +188,33 @@
       "http": [
         {
           "path": "/GetMyFriend",
+          "verb": "get"
+        }
+      ]
+    },
+    "prototype.IsFriend": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [ {
+        "args": "result",
+        "type": "object",
+        "root" : true
+      }],
+      "description": "Check if this user is my friend",
+      "http": [
+        {
+          "path": "/isFriend",
           "verb": "get"
         }
       ]

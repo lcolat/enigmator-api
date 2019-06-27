@@ -12,6 +12,9 @@
     },
     "content": {
       "type": "string"
+    },
+    "creationDate": {
+      "type": "date"
     }
   },
   "validations": [],
@@ -22,7 +25,7 @@
       "foreignKey": "",
       "options": {
         "nestRemoting": true,
-        "disableInclude": true
+        "disableInclude": false
       }
     },
     "user": {
@@ -31,7 +34,7 @@
       "foreignKey": "",
       "options": {
         "nestRemoting": true,
-        "disableInclude": true
+        "disableInclude": false
       }
     }
   },

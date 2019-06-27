@@ -1,3 +1,4 @@
+
 'use strict';
 
 module.exports = function(Userenigmator) {
@@ -189,6 +190,55 @@ module.exports = function(Userenigmator) {
           }
           callback(null, result);
         });
+      });
+    });
+  };
+
+  Userenigmator.prototype.IsFriend = function(id, options, callback) {
+    var app = Userenigmator.app;
+    var Friends = app.models.Friends;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    var result = {};
+    var friendRequest = {
+      state: 'accepted',
+      ID_FROM: userId,
+      ID_TO: id,
+    };
+    var MyfriendRequest = {
+      state: 'accepted',
+      ID_TO: userId,
+      ID_FROM: id,
+    };
+
+    Friends.find({where: friendRequest}, function(err, friendsPart1) {
+      Friends.find({where: MyfriendRequest}, function(err, friendsPart2) {
+        var userArray = [];
+        friendsPart1.forEach(function(element) {
+          userArray.push({id: element['id']});
+        });
+        friendsPart2.forEach(function(element) {
+          userArray.push({id: element['id']});
+        });
+        var research = {
+          where: {
+            or: userArray,
+          },
+        };
+        var result;
+        if (userArray.length === 0) {
+          result = {
+            message: "Cet user n'est pas votre amis",
+            isFriend: false,
+          };
+        } else {
+          result = {
+            message: 'Cet utilisateur est votre amis',
+            isFriend: true,
+          };
+        }
+        callback(null, result);
       });
     });
   };

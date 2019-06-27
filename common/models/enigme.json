@@ -10,16 +10,33 @@
       "type": "number",
       "required": true
     },
+    "name": {
+      "type": "string",
+      "required": true
+    },
     "question": {
       "type": "string"
     },
-    "anwser": {
+    "likes":{
+      "type": "number",
+      "default": 0
+    },
+    "creationDate": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
+    },
+    "answer": {
       "type": "string",
       "required": true
     },
     "status": {
       "type": "boolean",
       "required": true
+    },
+    "scoreReward": {
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],
@@ -31,14 +48,6 @@
       "options": {
         "nestRemoting": true,
         "disableInclude": true
-      }
-    },
-    "media": {
-      "type": "hasOne",
-      "model": "Media",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
       }
     }
   },
@@ -62,5 +71,195 @@
       "permission": "DENY"
     }
   ],
-  "methods": {}
+  "methods": {
+    "prototype.AnswerEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "answer",
+          "type": "string",
+          "required": true,
+          "description": "The answer provided by the user"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object"
+        }
+      ],
+      "description": "Answer to an Enigme ",
+      "http": [
+        {
+          "path": "/AnswerEnigme",
+          "verb": "post"
+        }
+      ]
+    },
+    "CreateEnigme": {
+      "accepts": [
+        {
+          "arg": "question",
+          "type": "string",
+          "required": true,
+          "description": "question"
+        },
+        {
+          "arg": "answer",
+          "type": "string",
+          "required": true,
+          "description": "answer"
+        },
+        {
+          "arg": "name",
+          "type": "string",
+          "required": true,
+          "description": "answer"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "arg":"result",
+          "type" :"object",
+          "root" : true
+        }
+      ],
+      "description": "Create an Enigme",
+      "http": [
+        {
+          "path": "/CreateEnigme",
+          "verb": "post"
+        }
+      ]
+    },
+    "prototype.AddMediaToEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg":"result",
+          "type" :"object",
+          "root" : true
+        }
+      ],
+      "description": "AddMediaToEnigme",
+      "http": [
+        {
+          "path": "/AddMediaToEnigme",
+          "verb": "post"
+        }
+      ]
+    },
+    "prototype.ValidateEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "scoreReward",
+          "type": "number",
+          "required": true,
+          "description": "The score Reward will yield the enigme"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object",
+          "root":true
+        }
+      ],
+      "description": "Admin validate an enigme and add the scoreReward ",
+      "http": [
+        {
+          "path": "/ValidateEnigme",
+          "verb": "patch"
+        }
+      ]
+    },
+    "prototype.LikeEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object",
+          "root":true
+        }
+      ],
+      "description": "User like an Enigme",
+      "http": [
+        {
+          "path": "/LikeEnigme",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

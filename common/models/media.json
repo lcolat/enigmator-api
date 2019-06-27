@@ -10,23 +10,26 @@
       "type": "number",
       "required": true
     },
-    "path": {
-      "type": "string",
-      "required": true
-    },
     "type": {
       "type": "string"
+    },
+    "filename": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
+  "relations": {
+    "media": {
+      "type": "belongsTo",
+      "model": "Enigme",
+      "foreignKey": "enigmeID",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
     }
-  ],
+  },
+  "acls": [],
   "methods": {}
 }

@@ -62,7 +62,7 @@ module.exports = function(Enigme) {
     });
   };
 
-  Enigme.CreateEnigme = function(question, answer, name, options, callback) {
+  Enigme.CreateEnigme = function(question, answer,scoreReward, name, options, callback) {
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
@@ -83,7 +83,7 @@ module.exports = function(Enigme) {
         answer: answer,
         status: false,
         UserID: userId,
-        scoreReward: 0,
+        scoreReward: scoreReward,
         topicId: dataTopic.id,
         name: name,
       };

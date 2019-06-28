@@ -273,6 +273,24 @@ module.exports = function(Userenigmator) {
       }
     });
   };
-
+  Userenigmator.prototype.GetConversationMessage = function(id,content,options,callback){
+    var app = Userenigmator.app;
+    var PrivateMessage = app.models.PrivateMessage;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    var result ={};
+    var privateMessageFrom =  {
+        userFromId : userId,
+        userToId : id,
+        content: content
+    };
+    var privateMessageFromTo =  {
+      userFromId : id,
+      userToId : userId,
+      content: content
+    };
+    PrivateMessage.find();
+  }
 };
 

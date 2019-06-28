@@ -258,6 +258,32 @@
         "path": "/SendAPrivateMessage",
         "verb": "post"
       }]
-    }
+    },
+    "prototype.GetConversationMessage": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [{
+        "arg": "result",
+        "type": "object",
+        "root": true
+      }],
+      "description": "Get messages between 2 users",
+      "http": [ {
+        "path": "/GetConversationMessage",
+        "verb": "post"
+      }]
+    },
+
   }
 }

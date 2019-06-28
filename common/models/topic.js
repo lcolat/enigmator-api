@@ -19,7 +19,13 @@ module.exports = function(Topic) {
       topicId: id,
     };
     Message.create(message);
-    Topic
+    Topic.findById(id, {}, function(err, topic) {
+      var topicBuffer = JSON.parse(JSON.stringify(topic));
+      topicBuffer.messagesCount = topicBuffer.messagesCount+=1;
+      delete topicBuffer.id;
+      Topic.replaceById(id,
+        topicBuffer);
+    });
     result = {
       statusCode: 200,
       status: "Le message est posté",

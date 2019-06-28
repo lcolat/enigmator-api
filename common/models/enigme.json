@@ -47,7 +47,7 @@
       "foreignKey": "UserID",
       "options": {
         "nestRemoting": true,
-        "disableInclude": true
+        "disableInclude": false
       }
     }
   },

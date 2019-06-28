@@ -103,6 +103,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "IsFriend"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "SendAMessage"
     }
   ],
   "methods": {
@@ -206,11 +213,13 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [ {
-        "args": "result",
-        "type": "object",
-        "root" : true
-      }],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
       "description": "Check if this user is my friend",
       "http": [
         {
@@ -218,6 +227,37 @@
           "verb": "get"
         }
       ]
+    },
+    "prototype.SendAMessage": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {
+          "arg": "content",
+          "type": "string",
+          "required": true,
+          "description": "Message content"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [{
+        "arg": "result",
+        "type": "object",
+        "root": true
+      }],
+      "description": "SendAPrivateMessage",
+      "http": [ {
+        "path": "/SendAPrivateMessage",
+        "verb": "post"
+      }]
     }
   }
 }

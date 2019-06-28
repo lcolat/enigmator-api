@@ -242,5 +242,37 @@ module.exports = function(Userenigmator) {
       });
     });
   };
+  Userenigmator.prototype.SendAMessage = function(id,content,options, callback) {
+    var app = Userenigmator.app;
+    var PrivateMessage = app.models.PrivateMessage;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    var result ={};
+    Userenigmator.prototype.IsFriend(id,options,function (err,data) {
+      console.log(data);
+      if(data.isFriend === true ){
+        var privateMessage = {
+          userFromId : id,
+          userToId : id,
+          content: content
+        };
+        PrivateMessage.create(privateMessage);
+
+        result ={
+          message : "message envoyé"
+        };
+
+        callback(null,result);
+      }else{
+
+         result ={
+          message : "erreur le message n'a pas été envoyé"
+        };
+        callback(null,result);
+      }
+    });
+  };
+
 };
 

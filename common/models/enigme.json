@@ -17,7 +17,7 @@
     "question": {
       "type": "string"
     },
-    "likes":{
+    "likes": {
       "type": "number",
       "default": 0
     },
@@ -99,7 +99,7 @@
         {
           "args": "result",
           "type": "object",
-          "root" : true
+          "root": true
         }
       ],
       "description": "Answer to an Enigme ",
@@ -123,7 +123,8 @@
           "type": "string",
           "required": true,
           "description": "answer"
-        },{
+        },
+        {
           "arg": "scoreReward",
           "type": "number",
           "required": true,
@@ -143,9 +144,9 @@
       ],
       "returns": [
         {
-          "arg":"result",
-          "type" :"object",
-          "root" : true
+          "arg": "result",
+          "type": "object",
+          "root": true
         }
       ],
       "description": "Create an Enigme",
@@ -184,9 +185,9 @@
       ],
       "returns": [
         {
-          "arg":"result",
-          "type" :"object",
-          "root" : true
+          "arg": "result",
+          "type": "object",
+          "root": true
         }
       ],
       "description": "AddMediaToEnigme",
@@ -224,7 +225,7 @@
         {
           "args": "result",
           "type": "object",
-          "root":true
+          "root": true
         }
       ],
       "description": "Admin validate an enigme and add the scoreReward ",
@@ -256,7 +257,7 @@
         {
           "args": "result",
           "type": "object",
-          "root":true
+          "root": true
         }
       ],
       "description": "User like an Enigme",

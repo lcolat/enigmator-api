@@ -15,9 +15,9 @@
       "type": "string",
       "required": true
     },
-    "messagesCount":{
-      "type":"number",
-      "default" : 0
+    "messagesCount": {
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],
@@ -76,9 +76,9 @@
       ],
       "returns": [
         {
-          "arg":"result",
-          "type" :"object",
-          "root" : true
+          "arg": "result",
+          "type": "object",
+          "root": true
         }
       ],
       "description": "Ajouter un amis",
@@ -103,9 +103,9 @@
       ],
       "returns": [
         {
-          "arg":"result",
-          "type" :"object",
-          "root" : true
+          "arg": "result",
+          "type": "object",
+          "root": true
         }
       ],
       "description": "Get messages of a topic",

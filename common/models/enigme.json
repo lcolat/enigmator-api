@@ -123,6 +123,11 @@
           "type": "string",
           "required": true,
           "description": "answer"
+        },{
+          "arg": "scoreReward",
+          "type": "number",
+          "required": true,
+          "description": "The score Reward will yield the enigme"
         },
         {
           "arg": "name",

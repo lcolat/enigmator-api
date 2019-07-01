@@ -110,6 +110,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "SendAMessage"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "GetConversationMessage"
     }
   ],
   "methods": {
@@ -127,7 +134,11 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [],
+      "returns": [{
+        "arg": "result",
+        "type": "object",
+        "root": true
+      }],
       "description": "Ajouter un amis",
       "http": [
         {
@@ -150,7 +161,11 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [],
+      "returns": [{
+        "arg": "result",
+        "type": "object",
+        "root": true
+      }],
       "description": "Accept a friend Request",
       "http": [
         {
@@ -173,7 +188,11 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [],
+      "returns": [{
+        "arg": "result",
+        "type": "object",
+        "root": true
+      }],
       "description": "Deny a friend Request",
       "http": [
         {
@@ -283,7 +302,6 @@
         "path": "/GetConversationMessage",
         "verb": "post"
       }]
-    },
-
+    }
   }
 }

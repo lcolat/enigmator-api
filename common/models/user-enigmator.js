@@ -1,4 +1,3 @@
-
 'use strict';
 
 module.exports = function(Userenigmator) {
@@ -53,9 +52,8 @@ module.exports = function(Userenigmator) {
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
-    var result = {};
-
     Userenigmator.findById(id, function(err, friend) {
+      var result = {};
       if (friend !== undefined && userId !== id) {
         var friendRequest = {
           state: 'request',
@@ -242,55 +240,65 @@ module.exports = function(Userenigmator) {
       });
     });
   };
-  Userenigmator.prototype.SendAMessage = function(id,content,options, callback) {
+  Userenigmator.prototype.SendAMessage = function(id, content, options, callback) {
     var app = Userenigmator.app;
     var PrivateMessage = app.models.PrivateMessage;
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
-    var result ={};
-    Userenigmator.prototype.IsFriend(id,options,function (err,data) {
+    var result = {};
+    Userenigmator.prototype.IsFriend(id, options, function(err, data) {
       console.log(data);
-      if(data.isFriend === true ){
+      if (data.isFriend === true) {
         var privateMessage = {
-          userFromId : id,
-          userToId : id,
-          content: content
+          userFromId: userId,
+          userToId: id,
+          content: content,
         };
         PrivateMessage.create(privateMessage);
 
-        result ={
-          message : "message envoyé"
+        result = {
+          message: 'message envoyé',
         };
 
-        callback(null,result);
-      }else{
-
-         result ={
-          message : "erreur le message n'a pas été envoyé"
+        callback(null, result);
+      } else {
+        result = {
+          message: "erreur le message n'a pas été envoyé",
         };
-        callback(null,result);
+        callback(null, result);
       }
     });
   };
-  Userenigmator.prototype.GetConversationMessage = function(id,content,options,callback){
+  Userenigmator.prototype.GetConversationMessage = function(id, options, callback) {
     var app = Userenigmator.app;
     var PrivateMessage = app.models.PrivateMessage;
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
-    var result ={};
-    var privateMessageFrom =  {
-        userFromId : userId,
-        userToId : id,
-        content: content
+    var result = {};
+    var privateMessageFrom = {
+      userFromId: userId,
+      userToId: id,
     };
-    var privateMessageFromTo =  {
-      userFromId : id,
-      userToId : userId,
-      content: content
+    var privateMessageTo = {
+      userFromId: id,
+      userToId: userId,
     };
-    PrivateMessage.find();
-  }
+    var array = [];
+    PrivateMessage.find({where: privateMessageFrom}, function(err, data1) {
+      console.log(data1);
+      PrivateMessage.find({where: privateMessageTo}, function(err, data) {
+        console.log(data);
+        array.push([data, data1]);
+        array.sort(function(a, b) {
+          // Turn your strings into dates, and then subtract them
+          // to get a value that is either negative, positive, or zero.
+          return new Date(b.date) - new Date(a.date);
+        });
+        callback(null, array);
+      });
+    });
+  };
 };
 

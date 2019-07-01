@@ -13,6 +13,11 @@
     "content": {
       "type": "string",
       "required": true
+    },
+    "creationDate": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
     }
   },
   "validations": [],

@@ -1,5 +1,5 @@
 {
-  "name": "Message",
+  "name": "PrivateMessage",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -11,7 +11,8 @@
       "required": true
     },
     "content": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "creationDate": {
       "type": "date",
@@ -21,16 +22,16 @@
   },
   "validations": [],
   "relations": {
-    "topic": {
+    "userFrom": {
       "type": "belongsTo",
-      "model": "Topic",
+      "model": "UserEnigmator",
       "foreignKey": "",
       "options": {
         "nestRemoting": true,
         "disableInclude": false
       }
     },
-    "user": {
+    "userTo": {
       "type": "belongsTo",
       "model": "UserEnigmator",
       "foreignKey": "",
@@ -40,13 +41,6 @@
       }
     }
   },
-  "acls": [
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
-  ],
+  "acls": [],
   "methods": {}
 }

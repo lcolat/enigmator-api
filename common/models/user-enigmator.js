@@ -319,7 +319,7 @@ module.exports = function(Userenigmator) {
         type: 'success',
       };
       console.log(enigmeDone);
-      //TODO C PEUTETRRE BUGER
+      // TODO C PEUTETRRE BUGER
       History.find({where: enigmeDone}, function(err, data) {
         console.log(data);
         data.forEach(function(value) {

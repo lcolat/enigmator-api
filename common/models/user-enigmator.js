@@ -300,5 +300,38 @@ module.exports = function(Userenigmator) {
       });
     });
   };
+
+  Userenigmator.prototype.GetEnigmeNotDone = function(id, options, callback) {
+    var app = Userenigmator.app;
+    var History = app.models.History;
+    var Enigme = app.models.Enigme;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    var result = {};
+    var validateEnigme = {
+      status: true,
+    };
+
+    Enigme.find({where: validateEnigme}, function(err, enigmeList) {
+      var enigmeDone = {
+        userEnigmatorId: id,
+        type: 'success',
+      };
+      console.log(enigmeDone);
+      //TODO C PEUTETRRE BUGER
+      History.find({where: enigmeDone}, function(err, data) {
+        console.log(data);
+        data.forEach(function(value) {
+          enigmeList.forEach(function(enigmeData, index, object) {
+            if (enigmeData.id === value.enigmeId) {
+              object.splice(index, 1);
+            }
+          });
+        });
+        callback(null, enigmeList);
+      });
+    });
+  };
 };
 

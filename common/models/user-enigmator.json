@@ -117,6 +117,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "GetConversationMessage"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "GetEnigmeNotDone"
     }
   ],
   "methods": {
@@ -300,8 +307,33 @@
       "description": "Get messages between 2 users",
       "http": [ {
         "path": "/GetConversationMessage",
-        "verb": "post"
+        "verb": "get"
       }]
+    },
+    "prototype.GetEnigmeNotDone" : {
+      "accepts": [
+    {
+    "arg": "id",
+    "type": "number",
+    "required": true,
+    "description": "ID of the friend wanted"
+    },
+    {
+    "arg": "options",
+    "type": "object",
+    "http": "optionsFromRequest"
     }
+    ],
+    "returns": [{
+      "arg": "result",
+      "type": "object",
+      "root": true
+    }],
+    "description": "Get all enigme not done by user",
+    "http": [ {
+      "path": "/GetEnigmeNotDone",
+      "verb": "get"
+    }]
+  }
   }
 }

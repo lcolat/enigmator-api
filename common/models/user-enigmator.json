@@ -10,7 +10,7 @@
       "type": "number",
       "required": true
     },
-    "rank": {
+    "score": {
       "type": "number"
     },
     "firstName": {
@@ -21,8 +21,9 @@
       "type": "string",
       "required": true
     },
-    "rang": {
-      "type": "string"
+    "validator": {
+      "type": "boolean",
+      "default" : false
     },
     "type": {
       "type": "string"
@@ -334,6 +335,31 @@
       "path": "/GetEnigmeNotDone",
       "verb": "get"
     }]
-  }
+  },
+    "prototype.GetEnigmeDone" : {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [{
+        "arg": "result",
+        "type": "object",
+        "root": true
+      }],
+      "description": "Get all enigme  done by user",
+      "http": [ {
+        "path": "/GetEnigmeDone",
+        "verb": "get"
+      }]
+    }
   }
 }

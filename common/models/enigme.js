@@ -39,7 +39,7 @@ module.exports = function(Enigme) {
           }
           UserEnigmator.findById(userId, {}, function(err, userData) {
             if (addRank === true) {
-              userData['rank'] += enigme['scoreReward'];
+              userData['score'] += enigme['scoreReward'];
             }
             UserEnigmator.upsert(userData, function(err, obj) {
             });

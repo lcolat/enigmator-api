@@ -11,7 +11,8 @@
       "required": true
     },
     "score": {
-      "type": "number"
+      "type": "number",
+      "default":0
     },
     "firstName": {
       "type": "string",

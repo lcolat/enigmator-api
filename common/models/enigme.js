@@ -135,7 +135,6 @@ module.exports = function(Enigme) {
       }
     });
   };
-
   Enigme.prototype.ValidateEnigme = function(id, scoreReward, options, callback) {
     var now = new Date();
     var app = Enigme.app;

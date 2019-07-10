@@ -218,7 +218,11 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [],
+      "returns": [{
+        "arg": "result",
+        "type": "object",
+        "root": true
+      }],
       "description": "Affiche la liste des amis",
       "http": [
         {

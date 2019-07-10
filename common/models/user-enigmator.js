@@ -345,7 +345,7 @@ module.exports = function(Userenigmator) {
       status: true,
     };
 
-    Enigme.find({include: 'Enigme_User', where: validateEnigme}, function(err, enigmeList) {
+    Enigme.find({where: validateEnigme}, function(err, enigmeList) {
       var enigmeDone = {
         userEnigmatorId: id,
         type: 'success',

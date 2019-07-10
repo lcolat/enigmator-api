@@ -357,7 +357,7 @@ module.exports = function(Userenigmator) {
         data.forEach(function(value) {
           enigmeList.forEach(function(enigmeData, index, object) {
             if (enigmeData.id === value.enigmeId) {
-              result.append(enigmeData);
+              result.push(enigmeData);
             }
           });
         });

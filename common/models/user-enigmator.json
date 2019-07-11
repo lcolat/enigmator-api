@@ -12,7 +12,7 @@
     },
     "score": {
       "type": "number",
-      "default":0
+      "default": 0
     },
     "firstName": {
       "type": "string",
@@ -24,7 +24,7 @@
     },
     "validator": {
       "type": "boolean",
-      "default" : false
+      "default": false
     },
     "type": {
       "type": "string"
@@ -143,11 +143,13 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{
-        "arg": "result",
-        "type": "object",
-        "root": true
-      }],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
       "description": "Ajouter un amis",
       "http": [
         {
@@ -170,11 +172,13 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{
-        "arg": "result",
-        "type": "object",
-        "root": true
-      }],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
       "description": "Accept a friend Request",
       "http": [
         {
@@ -197,11 +201,13 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{
-        "arg": "result",
-        "type": "object",
-        "root": true
-      }],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
       "description": "Deny a friend Request",
       "http": [
         {
@@ -218,11 +224,13 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{
-        "arg": "result",
-        "type": "object",
-        "root": true
-      }],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
       "description": "Affiche la liste des amis",
       "http": [
         {
@@ -280,16 +288,20 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{
-        "arg": "result",
-        "type": "object",
-        "root": true
-      }],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
       "description": "SendAPrivateMessage",
-      "http": [ {
-        "path": "/SendAPrivateMessage",
-        "verb": "post"
-      }]
+      "http": [
+        {
+          "path": "/SendAPrivateMessage",
+          "verb": "post"
+        }
+      ]
     },
     "prototype.GetConversationMessage": {
       "accepts": [
@@ -305,43 +317,22 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{
-        "arg": "result",
-        "type": "object",
-        "root": true
-      }],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
       "description": "Get messages between 2 users",
-      "http": [ {
-        "path": "/GetConversationMessage",
-        "verb": "get"
-      }]
+      "http": [
+        {
+          "path": "/GetConversationMessage",
+          "verb": "get"
+        }
+      ]
     },
-    "prototype.GetEnigmeNotDone" : {
-      "accepts": [
-    {
-    "arg": "id",
-    "type": "number",
-    "required": true,
-    "description": "ID of the friend wanted"
-    },
-    {
-    "arg": "options",
-    "type": "object",
-    "http": "optionsFromRequest"
-    }
-    ],
-    "returns": [{
-      "arg": "result",
-      "type": "object",
-      "root": true
-    }],
-    "description": "Get all enigme not done by user",
-    "http": [ {
-      "path": "/GetEnigmeNotDone",
-      "verb": "get"
-    }]
-  },
-    "prototype.GetEnigmeDone" : {
+    "prototype.GetEnigmeNotDone": {
       "accepts": [
         {
           "arg": "id",
@@ -355,16 +346,78 @@
           "http": "optionsFromRequest"
         }
       ],
-      "returns": [{
-        "arg": "result",
-        "type": "object",
-        "root": true
-      }],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Get all enigme not done by user",
+      "http": [
+        {
+          "path": "/GetEnigmeNotDone",
+          "verb": "get"
+        }
+      ]
+    },
+    "prototype.GetEnigmeDone": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the friend wanted"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
       "description": "Get all enigme  done by user",
-      "http": [ {
-        "path": "/GetEnigmeDone",
-        "verb": "get"
-      }]
+      "http": [
+        {
+          "path": "/GetEnigmeDone",
+          "verb": "get"
+        }
+      ]
+    },
+    "prototype.GetEnigmeTried": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the user"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Get all enigme tried by user",
+      "http": [
+        {
+          "path": "/GetEnigmeTried",
+          "verb": "get"
+        }
+      ]
     }
   }
 }

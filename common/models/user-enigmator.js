@@ -78,10 +78,10 @@ module.exports = function(Userenigmator) {
               console.log(models);
               result = {
                 statusCode: 200,
-                message: "La requète d'amis a deja été accepté",
+                message: "La requete d'ami a été acceptée",
               };
+              callback(null, result);
             });
-            callback(null, result);
           }
         });
       }
@@ -175,18 +175,16 @@ module.exports = function(Userenigmator) {
             or: userArray,
           },
         };
+        console.log(research);
+        console.log(userArray)
         Userenigmator.find(research, function(err, resultReq) {
+          console.log(err);
+          console.log(resultReq);
           if (resultReq.length === 0) {
-            result = {
-              statusCode: '204',
-            };
+            result = undefined;
           } else {
-            result = {
-              result: resultReq,
-              statusCode: '200',
-            };
           }
-          callback(null, result);
+          callback(null, resultReq);
         });
       });
     });
@@ -357,7 +355,7 @@ module.exports = function(Userenigmator) {
         data.forEach(function(value) {
           enigmeList.forEach(function(enigmeData, index, object) {
             if (enigmeData.id === value.enigmeId) {
-              result.append(enigmeData);
+              result.push(enigmeData);
             }
           });
         });

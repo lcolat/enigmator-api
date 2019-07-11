@@ -2,8 +2,12 @@
 
 module.exports = function(Userenigmator) {
   Userenigmator.disableRemoteMethodByName('upsert');
-  Userenigmator.disableRemoteMethodByName('prototype.__destroyById__accessTokens'); // DELETE
-  Userenigmator.disableRemoteMethodByName('prototype.__updateById__accessTokens'); // PUT
+  Userenigmator.disableRemoteMethodByName(
+    'prototype.__destroyById__accessTokens',
+  ); // DELETE
+  Userenigmator.disableRemoteMethodByName(
+    'prototype.__updateById__accessTokens',
+  ); // PUT
 
   Userenigmator.prototype.AddAFriend = function(id, options, callback) {
     // TODO
@@ -46,7 +50,11 @@ module.exports = function(Userenigmator) {
     }
   };
 
-  Userenigmator.prototype.AcceptAFriendRequest = function(id, options, callback) {
+  Userenigmator.prototype.AcceptAFriendRequest = function(
+    id,
+    options,
+    callback,
+  ) {
     var app = Userenigmator.app;
     var Friends = app.models.Friends;
     const token = options && options.accessToken;
@@ -74,7 +82,10 @@ module.exports = function(Userenigmator) {
               ID_FROM: id,
               ID_TO: userId,
             };
-            Friends.upsertWithWhere(friendRequest, validateRequest, function(err, models) {
+            Friends.upsertWithWhere(friendRequest, validateRequest, function(
+              err,
+              models,
+            ) {
               console.log(models);
               result = {
                 statusCode: 200,
@@ -123,7 +134,10 @@ module.exports = function(Userenigmator) {
               ID_FROM: id,
               ID_TO: userId,
             };
-            Friends.upsertWithWhere(friendRequest, validateRequest, function(err, models) {
+            Friends.upsertWithWhere(friendRequest, validateRequest, function(
+              err,
+              models,
+            ) {
               result = {
                 statusCode: 200,
                 message: "La requète d'amis a été refusée",
@@ -176,7 +190,7 @@ module.exports = function(Userenigmator) {
           },
         };
         console.log(research);
-        console.log(userArray)
+        console.log(userArray);
         Userenigmator.find(research, function(err, resultReq) {
           console.log(err);
           console.log(resultReq);
@@ -238,7 +252,12 @@ module.exports = function(Userenigmator) {
       });
     });
   };
-  Userenigmator.prototype.SendAMessage = function(id, content, options, callback) {
+  Userenigmator.prototype.SendAMessage = function(
+    id,
+    content,
+    options,
+    callback,
+  ) {
     var app = Userenigmator.app;
     var PrivateMessage = app.models.PrivateMessage;
     const token = options && options.accessToken;
@@ -268,7 +287,11 @@ module.exports = function(Userenigmator) {
       }
     });
   };
-  Userenigmator.prototype.GetConversationMessage = function(id, options, callback) {
+  Userenigmator.prototype.GetConversationMessage = function(
+    id,
+    options,
+    callback,
+  ) {
     var app = Userenigmator.app;
     var PrivateMessage = app.models.PrivateMessage;
     const token = options && options.accessToken;
@@ -311,7 +334,10 @@ module.exports = function(Userenigmator) {
       status: true,
     };
 
-    Enigme.find({include: 'Enigme_User', where: validateEnigme}, function(err, enigmeList) {
+    Enigme.find({include: 'Enigme_User', where: validateEnigme}, function(
+      err,
+      enigmeList,
+    ) {
       var enigmeDone = {
         userEnigmatorId: id,
         type: 'success',
@@ -343,7 +369,10 @@ module.exports = function(Userenigmator) {
       status: true,
     };
 
-    Enigme.find({include: 'Enigme_User', where: validateEnigme}, function(err, enigmeList) {
+    Enigme.find({include: 'Enigme_User', where: validateEnigme}, function(
+      err,
+      enigmeList,
+    ) {
       var enigmeDone = {
         userEnigmatorId: id,
         type: 'success',
@@ -363,5 +392,55 @@ module.exports = function(Userenigmator) {
       });
     });
   };
-};
+  Userenigmator.prototype.GetEnigmeTried = function(id, options, callback) {
+    var app = Userenigmator.app;
+    var History = app.models.History;
+    var Enigme = app.models.Enigme;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    var result = [];
+    var validateEnigme = {
+      status: true,
+    };
 
+    const haveEnigma = (enigmas, enigmaID) => {
+      let res = -1;
+      enigmas.forEach((enigma, index) => {
+        if (enigma.id == enigmaID) {
+          res = index;
+        }
+      });
+      return res;
+    };
+    Enigme.find({include: 'Enigme_User', where: validateEnigme}, function(
+      err,
+      enigmeList,
+    ) {
+      var enigmeTried = {
+        userEnigmatorId: id,
+        type: 'tried',
+      };
+      History.find({where: enigmeTried}, function(err, data) {
+        data.forEach(function(value) {
+          enigmeList.forEach(function(enigmeData, index, object) {
+            if (enigmeData.id === value.enigmeId) {
+              const resultIndex = haveEnigma(result, enigmeData.id);
+              if (resultIndex !== -1) {
+                if (result[resultIndex].lastTryDate < value.date) {
+                  const newEnigmeData = enigmeData;
+                  newEnigmeData.lastTryDate = value.date;
+                  result.splice(resultIndex, 1, newEnigmeData);
+                }
+              } else {
+                enigmeData.lastTryDate = value.date;
+                result.push(enigmeData);
+              }
+            }
+          });
+        });
+        callback(null, result);
+      });
+    });
+  };
+};

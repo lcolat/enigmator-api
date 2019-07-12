@@ -76,6 +76,8 @@ module.exports = function(Enigme) {
       creationDate: now.toJSON(),
       title: topicName,
       userEnigmatorsId: userId,
+      isAutomatic:true,
+      Description: "Voici la description du topic sur l'enigme" + name
     };
     Topic.create(topic, function(err, dataTopic) {
       var enigmeToCreate = {

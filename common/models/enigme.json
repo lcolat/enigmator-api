@@ -232,7 +232,7 @@
       "http": [
         {
           "path": "/ValidateEnigme",
-          "verb": "patch"
+          "verb": "put"
         }
       ]
     },

@@ -18,6 +18,21 @@
     "messagesCount": {
       "type": "number",
       "default": 0
+    },
+    "description" :{
+      "type": "string"
+    },
+    "isAutomatic" :{
+      "type": "boolean",
+      "default" : false
+    },
+    "lastEditDate": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
+    },"likes": {
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],

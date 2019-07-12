@@ -21,7 +21,9 @@ module.exports = function(Topic) {
     Message.create(message);
     Topic.findById(id, {}, function(err, topic) {
       var topicBuffer = JSON.parse(JSON.stringify(topic));
+      topicBuffer.lastEditDate = now.toJSON();
       topicBuffer.messagesCount = topicBuffer.messagesCount+=1;
+
       delete topicBuffer.id;
       Topic.replaceById(id,
         topicBuffer);

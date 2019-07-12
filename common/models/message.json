@@ -17,6 +17,9 @@
       "type": "date",
       "required": true,
       "default": "$now"
+    },"likes": {
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],

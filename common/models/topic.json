@@ -18,17 +18,18 @@
       "type": "number",
       "default": 0
     },
-    "description" :{
+    "description": {
       "type": "string"
     },
-    "isAutomatic" :{
+    "isAutomatic": {
       "type": "boolean",
-      "default" : false
+      "default": false
     },
     "lastEditDate": {
       "type": "date",
       "default": "$now"
-    },"likes": {
+    },
+    "likes": {
       "type": "number",
       "default": 0
     }
@@ -61,6 +62,24 @@
       "principalId": "$unauthenticated",
       "permission": "DENY",
       "property": "PostAMessage"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "LikeTopic"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
     }
   ],
   "methods": {
@@ -125,6 +144,39 @@
       "http": [
         {
           "path": "/GetMessages",
+          "verb": "post"
+        }
+      ]
+    },
+    "prototype.LikeTopic": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "idTopic",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest",
+          "required": true
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Get messages of a topic",
+      "http": [
+        {
+          "path": "/LikeTopic",
           "verb": "post"
         }
       ]

@@ -34,25 +34,30 @@ module.exports = function(Enigme) {
           type: 'success',
         };
         History.find({where: enigmeDone}, function(err, data) {
+          console.log(data);
           if (data.length === 0) {
             addRank = true;
           }
           UserEnigmator.findById(userId, {}, function(err, userData) {
             if (addRank === true) {
+              console.log("addScore")
               userData['score'] += enigme['scoreReward'];
             }
+            var userHistory = {
+              userEnigmatorId: userId,
+              enigmeId: id,
+              type: 'success',
+              date: now.toJSON(),
+            };
+
+            console.log(userData);
             UserEnigmator.upsert(userData, function(err, obj) {
             });
+            History.create(userHistory);
+            callback(null, result);
           });
         });
-        var userHistory = {
-          userEnigmatorId: userId,
-          enigmeId: id,
-          type: 'success',
-          date: now.toJSON(),
-        };
-        History.create(userHistory);
-        callback(null, result);
+
       } else {
         result = {
           message: 'mauvaise réponse ! ',
@@ -204,6 +209,7 @@ module.exports = function(Enigme) {
       });
     });
   };
+
   Enigme.prototype.LikeEnigme = function(id, options, callback) {
     // TODO
     var now = new Date();

@@ -16,6 +16,10 @@
     },
     "type": {
       "type": "string"
+    },
+    "topicId": {
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],

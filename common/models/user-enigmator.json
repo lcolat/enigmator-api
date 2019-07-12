@@ -125,6 +125,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "GetEnigmeNotDone"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "GetStats"
     }
   ],
   "methods": {
@@ -382,10 +389,12 @@
         }
       ],
       "description": "Get all enigme  done by user",
-      "http": [ {
-        "path": "/GetEnigmeDone",
-        "verb": "get"
-      }]
+      "http": [
+        {
+          "path": "/GetEnigmeDone",
+          "verb": "get"
+        }
+      ]
     },
     "prototype.GetStats" : {
     "accepts": [

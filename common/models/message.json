@@ -51,5 +51,38 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+    "prototype.LikeMessage": {
+    "accepts": [
+      {
+        "arg": "id",
+        "type": "string",
+        "required": true,
+        "description": "idMessage",
+        "http": {
+          "source": "path"
+        }
+      },
+      {
+        "arg": "options",
+        "type": "object",
+        "http": "optionsFromRequest",
+        "required": true
+      }
+    ],
+    "returns": [
+      {
+        "arg": "result",
+        "type": "object",
+        "root": true
+      }
+    ],
+    "description": "like message",
+    "http": [
+      {
+        "path": "/LikeMessage",
+        "verb": "post"
+      }
+    ]
+  }}
 }

@@ -16,7 +16,8 @@
     "creationDate": {
       "type": "date",
       "default": "$now"
-    },"likes": {
+    },
+    "likes": {
       "type": "number",
       "default": 0
     }

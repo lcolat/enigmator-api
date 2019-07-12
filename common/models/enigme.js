@@ -77,7 +77,7 @@ module.exports = function(Enigme) {
       title: topicName,
       userEnigmatorsId: userId,
       isAutomatic:true,
-      Description: "Voici la description du topic sur l'enigme" + name
+      description: "Voici la description du topic sur l'enigme " + name
     };
     Topic.create(topic, function(err, dataTopic) {
       var enigmeToCreate = {
@@ -171,7 +171,39 @@ module.exports = function(Enigme) {
       });
     });
   };
+  Enigme.prototype.RefuseEnigme = function(id, options, callback) {
+    var now = new Date();
+    var app = Enigme.app;
+    var UserEnigmator = app.models.UserEnigmator;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    UserEnigmator.findById(userId, {}, function(err, user) {
+      // TODO RESTRICT USER
+      /* if(user.role==='ADMIN'){
 
+      } */
+      Enigme.findById(id, {}, function(err, enigme) {
+        var enigmeBuffer = JSON.parse(JSON.stringify(enigme));
+        enigmeBuffer.status = false;
+        delete enigmeBuffer.id;
+        console.log(enigmeBuffer);
+        Enigme.replaceById(id,
+          enigmeBuffer,
+          function(err, data) {
+            if (err)
+              callback(err);
+            else {
+              console.log(data);
+              var result = {
+                message: 'enigme refused ! ',
+              };
+              callback(null, result);
+            }
+          });
+      });
+    });
+  };
   Enigme.prototype.LikeEnigme = function(id, options, callback) {
     // TODO
     var now = new Date();

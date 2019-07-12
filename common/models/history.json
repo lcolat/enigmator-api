@@ -20,6 +20,10 @@
     "topicId": {
       "type": "number",
       "default": 0
+    },
+    "messageId":{
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],

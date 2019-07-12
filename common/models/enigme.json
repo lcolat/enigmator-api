@@ -232,10 +232,43 @@
       "http": [
         {
           "path": "/ValidateEnigme",
-          "verb": "patch"
+          "verb": "put"
         }
       ]
     },
+    "prototype.RefuseEnigme": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "required": true,
+          "description": "id de l'enigme",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "args": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Admin refuse enigme",
+      "http": [
+        {
+          "path": "/RefuseEnigme",
+          "verb": "put"
+        }
+      ]
+    },
+
     "prototype.LikeEnigme": {
       "accepts": [
         {

@@ -77,7 +77,7 @@ module.exports = function(Enigme) {
       title: topicName,
       userEnigmatorsId: userId,
       isAutomatic:true,
-      description: "Voici la description du topic sur l'enigme " + name
+      description: question
     };
     Topic.create(topic, function(err, dataTopic) {
       var enigmeToCreate = {

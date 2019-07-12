@@ -363,5 +363,36 @@ module.exports = function(Userenigmator) {
       });
     });
   };
+  Userenigmator.prototype.GetStats = function (id,callback) {
+    var result = {}
+    Userenigmator.findById(id, function (err, user) {
+      var rankByCountry = {
+        where: {
+          country: user.country
+        },
+        order: 'score desc'
+      };
+      result['id'] = id;
+      result['country'] = user.country;
+      result['score'] = user.score;
+        Userenigmator.find(rankByCountry, function (err, rankList) {
+          rankList.forEach(function (one_user, index) {
+            if (one_user['id'] === id) {
+              result.localRank = index+1
+            }
+          });
+        Userenigmator.find({order: 'score desc'}, function (err, rankList) {
+          console.log(err);
+          console.log(rankList);
+          rankList.forEach(function (one_user, index) {
+            if (one_user['id'] === id) {
+              result.globalRank = index+1
+            }
+          });
+          callback(null, result)
+        });
+      });
+    });
+  }
 };
 

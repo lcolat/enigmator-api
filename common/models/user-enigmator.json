@@ -31,7 +31,6 @@
     },
     "creationDate": {
       "type": "date",
-      "required": true,
       "default": "$now"
     },
     "country": {
@@ -126,6 +125,13 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "GetEnigmeNotDone"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "GetStats"
     }
   ],
   "methods": {
@@ -389,6 +395,26 @@
           "verb": "get"
         }
       ]
+    },
+    "prototype.GetStats" : {
+    "accepts": [
+      {
+        "arg": "id",
+        "type": "number",
+        "required": true,
+        "description": "ID of user"
+      }
+    ],
+    "returns": [{
+      "arg": "result",
+      "type": "object",
+      "root": true
+    }],
+    "description": "Get stats of one userr",
+    "http": [ {
+      "path": "/GetStats",
+      "verb": "get"
+    }]
     },
     "prototype.GetEnigmeTried": {
       "accepts": [

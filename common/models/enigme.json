@@ -23,7 +23,6 @@
     },
     "creationDate": {
       "type": "date",
-      "required": true,
       "default": "$now"
     },
     "answer": {
@@ -268,7 +267,6 @@
         }
       ]
     },
-
     "prototype.LikeEnigme": {
       "accepts": [
         {

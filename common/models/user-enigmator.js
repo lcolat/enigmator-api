@@ -474,5 +474,28 @@ module.exports = function(Userenigmator) {
         });
       });
     });
+  };
+
+  Userenigmator.AddProfilePic = function (req,res,options,callback)  {
+    var app = Userenigmator.app;
+    var Container = app.models.Container;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+    Container.upload(req, res, {container: 'profile'}, function(err, data) {
+      console.log(data);
+      if (err) {
+      } else {
+        var namefile = data.files.file[0].name;
+          Userenigmator.findById(userId, {}, function(err, userData) {
+              userData['profilePicture']=namefile;
+              console.log(userData);
+            Userenigmator.upsert(userData, function(err, obj) {
+            });
+            var result = {message:"photo enregistrée"}
+            callback(null, result);
+          });
+      }
+    });
   }
 };

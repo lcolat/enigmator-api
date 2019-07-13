@@ -1,5 +1,7 @@
 #!/bin/bash
 PATH="/home/ubuntu/.local/bin:$PATH"
+sudo cp -r /home/ubuntu/enigmator/temporary-files/files /home/ubuntu/enigmator/enigmator-api/
+sudo rm -Rf /home/ubuntu/enigmator/temporary-files/
 cd /home/ubuntu/enigmator/enigmator-api/
 chown -Rf ubuntu:ubuntu /home/ubuntu/enigmator/enigmator-api/
 rm server/datasources.json

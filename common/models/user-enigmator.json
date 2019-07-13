@@ -406,6 +406,35 @@
         }
       ]
     },
+    "prototype.GetEnigmeTried": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the user"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Get all enigme tried by user",
+      "http": [
+        {
+          "path": "/GetEnigmeTried",
+          "verb": "get"
+        }
+      ]
+    },
     "prototype.GetStats": {
       "accepts": [
         {

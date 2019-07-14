@@ -144,7 +144,7 @@
       "http": [
         {
           "path": "/GetMessages",
-          "verb": "post"
+          "verb": "get"
         }
       ]
     },

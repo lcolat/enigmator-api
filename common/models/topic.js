@@ -40,7 +40,7 @@ module.exports = function(Topic) {
     var Message = app.models.Message;
     Message.find({where :{topicId : id}},function(err,data){
       if(data.length !== 0){
-        callback(null,{data: data});
+        callback(null,data);
       }else{
         callback(err);
       }

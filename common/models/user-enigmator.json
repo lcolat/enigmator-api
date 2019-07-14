@@ -406,6 +406,26 @@
         }
       ]
     },
+    "prototype.GetStats" : {
+    "accepts": [
+      {
+        "arg": "id",
+        "type": "number",
+        "required": true,
+        "description": "ID of user"
+      }
+    ],
+    "returns": [{
+      "arg": "result",
+      "type": "object",
+      "root": true
+    }],
+    "description": "Get stats of one userr",
+    "http": [ {
+      "path": "/GetStats",
+      "verb": "get"
+    }]
+    },
     "prototype.GetEnigmeTried": {
       "accepts": [
         {
@@ -431,30 +451,6 @@
       "http": [
         {
           "path": "/GetEnigmeTried",
-          "verb": "get"
-        }
-      ]
-    },
-    "prototype.GetStats": {
-      "accepts": [
-        {
-          "arg": "id",
-          "type": "number",
-          "required": true,
-          "description": "ID of user"
-        }
-      ],
-      "returns": [
-        {
-          "arg": "result",
-          "type": "object",
-          "root": true
-        }
-      ],
-      "description": "Get stats of one userr",
-      "http": [
-        {
-          "path": "/GetStats",
           "verb": "get"
         }
       ]

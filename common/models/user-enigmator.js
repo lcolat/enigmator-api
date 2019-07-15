@@ -190,16 +190,20 @@ module.exports = function(Userenigmator) {
           },
         };
         console.log(research);
-        console.log(userArray)
-        Userenigmator.find(research, function(err, resultReq) {
-          console.log(err);
-          console.log(resultReq);
-          if (resultReq.length === 0) {
-            result = undefined;
-          } else {
-          }
-          callback(null, resultReq);
-        });
+        console.log(userArray);
+        if(userArray.length!==0) {
+          Userenigmator.find(research, function (err, resultReq) {
+            console.log(err);
+            console.log(resultReq);
+            if (resultReq.length === 0) {
+              result = undefined;
+            } else {
+            }
+            callback(null, resultReq);
+          });
+        }else{
+          callback(null, []);
+        }
       });
     });
   };

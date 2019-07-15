@@ -52,5 +52,16 @@ boot(app, __dirname, function(err) {
     socket.on('disconnect', function(){
       console.log('user disconnected');
     });
+    socket.on('subscribe', function(room) {
+      console.log('joining room', room);
+      socket.join(room);
+    });
+
+    socket.on('send message', function(data) {
+      console.log('sending room post', data.room);
+      socket.broadcast.to(data.room).emit('conversation private post', {
+        message: data.message
+      });
+    });
   });
 });

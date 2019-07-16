@@ -209,12 +209,6 @@
           }
         },
         {
-          "arg": "scoreReward",
-          "type": "number",
-          "required": true,
-          "description": "The score Reward will yield the enigme"
-        },
-        {
           "arg": "options",
           "type": "object",
           "http": "optionsFromRequest"
@@ -227,7 +221,7 @@
           "root": true
         }
       ],
-      "description": "Admin validate an enigme and add the scoreReward ",
+      "description": "Admin validate an enigme ",
       "http": [
         {
           "path": "/ValidateEnigme",

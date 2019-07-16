@@ -142,7 +142,7 @@ module.exports = function(Enigme) {
       }
     });
   };
-  Enigme.prototype.ValidateEnigme = function(id, scoreReward, options, callback) {
+  Enigme.prototype.ValidateEnigme = function(id, options, callback) {
     var now = new Date();
     var app = Enigme.app;
     var UserEnigmator = app.models.UserEnigmator;
@@ -157,7 +157,6 @@ module.exports = function(Enigme) {
       Enigme.findById(id, {}, function(err, enigme) {
         var enigmeBuffer = JSON.parse(JSON.stringify(enigme));
         enigmeBuffer.status = true;
-        enigmeBuffer.scoreReward = scoreReward;
         delete enigmeBuffer.id;
         console.log(enigmeBuffer);
         Enigme.replaceById(id,

@@ -23,7 +23,7 @@ module.exports = function(Enigme) {
         callback(null, result);
         return;
       }
-      if (answer === enigme['answer']) {
+      if (answer.toLowerCase() === enigme['answer'].toLowerCase()) {
         result = {
           message: 'bonne réponse ! ',
         };

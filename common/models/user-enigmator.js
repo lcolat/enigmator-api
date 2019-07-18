@@ -501,5 +501,16 @@ module.exports = function(Userenigmator) {
           });
       }
     });
-  }
+  };
+
+  Userenigmator.prototype.ChangeUsername = function (id,username,callback)  {
+        Userenigmator.findById(id, {}, function(err, userData) {
+          userData['username']=username;
+          console.log(userData);
+          Userenigmator.upsert(userData, function(err, obj) {
+          });
+          var result = {message:"username changé", result:true};
+          callback(null, result);
+        });
+      }
 };

@@ -498,6 +498,35 @@
           "verb": "post"
         }
       ]
+    },
+    "prototype.ChangeUsername": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "number",
+          "required": true,
+          "description": "ID of the user"
+        },{
+          "arg": "username",
+          "type": "string",
+          "required": true,
+          "description": "new username"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Change username",
+      "http": [
+        {
+          "path": "/ChangeUserName",
+          "verb": "post"
+        }
+      ]
     }
   }
 }

@@ -25,5 +25,22 @@
     "connector": "loopback-component-storage",
     "provider": "filesystem",
     "root": "./files"
+  },
+  "myEmailDataSource": {
+    "name": "myEmailDataSource",
+    "connector": "mail",
+    "transports": [{
+      "type": "SMTP",
+      "host": "smtp.gmail.com",
+      "secure": true,
+      "port": 465,
+      "auth": {
+        "user": "esgi.projet@gmail.com",
+        "pass": "esgithebest"
+      },
+      "tls": {
+        "rejectUnauthorized": false
+      }
+    }]
   }
 }

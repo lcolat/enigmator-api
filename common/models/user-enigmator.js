@@ -8,6 +8,12 @@ module.exports = function(Userenigmator) {
   Userenigmator.disableRemoteMethodByName(
     'prototype.__updateById__accessTokens',
   ); // PUT
+  function formatValue(format,value){
+    if(value===undefined|| value === 0){
+      return "";
+    }
+    return format+value;
+  }
 
   Userenigmator.prototype.AddAFriend = function(id, options, callback) {
     // TODO
@@ -513,4 +519,66 @@ module.exports = function(Userenigmator) {
           callback(null, result);
         });
       }
+
+  Userenigmator.DeleteAccount = function(options,callback){
+      var app = Userenigmator.app;
+      var Container = app.models.Container;
+      const token = options && options.accessToken;
+      const userId = token && token.userId;
+      const user = userId ? 'user#' + userId : '<anonymous>';
+      Userenigmator.findById(userId, {}, function(err, userData) {
+        userData['username']="username"+userId;
+        userData['firstName:']="";
+        userData['lastName:']=""+userId;
+        userData['profilePicture']="";
+        userData['score']=0;
+        userData['email']="";
+        console.log(userData);
+        Userenigmator.upsert(userData, function(err, obj) {
+        });
+        var result = {message:"username changé", result:true};
+        callback(null, result);
+      });
+  };
+  Userenigmator.SendMailWithData = function(options,callback){
+    var app = Userenigmator.app;
+    var Container = app.models.Container;
+    const token = options && options.accessToken;
+    const userId = token && token.userId;
+    const user = userId ? 'user#' + userId : '<anonymous>';
+
+    Userenigmator.findById(userId, {}, function(err, userData) {
+      var History = app.models.History;
+      var UserData = "Informations de votre compte : \nusername:"+userData.username+" \n"+"prénom:"+userData['firstName']+" \nnom de famille:"+userData['lastName']+" \nscore:"+userData.score+" \npays: "+userData.country+"\nDate de creation : "+userData.creationDate+"";
+      var historyData ="" ;
+      History.find({where:{userEnigmatorId :userId}},function(err,historyList){
+        console.log(historyList);
+        if(historyList.length!==0){
+          historyData +="\nHistorique :\n" ;
+        }
+        historyList.forEach(function (history) {
+          historyData+=history['type'];
+          historyData+=formatValue(" | Enigme :",history.enigmeId);
+          historyData+=formatValue(" | Message :",history.messageId);
+          historyData+=formatValue(" | Topic :",history.topicId);
+        });
+        UserData+= historyData;
+
+        Userenigmator.app.models.Email.send({
+          to: userData.email,
+          from: 'esgi.projet@gmail.com',
+          subject: 'Voici les informations vous concernant',
+          text: UserData
+        }, function(err, mail) {
+          console.log('email sent!');
+          if(err)
+            callback(err);
+          else
+            callback(null,{response:"email_send"})
+        });
+      });
+
+    });
+
+  }
 };

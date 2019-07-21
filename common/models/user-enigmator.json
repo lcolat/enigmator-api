@@ -149,6 +149,19 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "AddProfilePic"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "DeleteAccount"
+    },{
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "SendMailWithData"
     }
   ],
   "methods": {
@@ -524,6 +537,52 @@
       "http": [
         {
           "path": "/ChangeUserName",
+          "verb": "post"
+        }
+      ]
+    },
+    "DeleteAccount": {
+      "accepts": [
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Change username",
+      "http": [
+        {
+          "path": "/DeleteAccount",
+          "verb": "post"
+        }
+      ]
+    },
+    "SendMailWithData": {
+      "accepts": [
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Send",
+      "http": [
+        {
+          "path": "/SendMailWithData",
           "verb": "post"
         }
       ]

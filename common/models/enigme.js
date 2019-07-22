@@ -40,7 +40,7 @@ module.exports = function(Enigme) {
           }
           UserEnigmator.findById(userId, {}, function(err, userData) {
             if (addRank === true) {
-              console.log("addScore")
+              console.log('addScore');
               userData['score'] += enigme['scoreReward'];
             }
             var userHistory = {
@@ -57,7 +57,6 @@ module.exports = function(Enigme) {
             callback(null, result);
           });
         });
-
       } else {
         result = {
           message: 'mauvaise réponse ! ',
@@ -67,7 +66,7 @@ module.exports = function(Enigme) {
     });
   };
 
-  Enigme.CreateEnigme = function(question, answer,scoreReward, name, options, callback) {
+  Enigme.CreateEnigme = function(question, answer, scoreReward, name, options, callback) {
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
@@ -81,8 +80,8 @@ module.exports = function(Enigme) {
       creationDate: now.toJSON(),
       title: topicName,
       userEnigmatorsId: userId,
-      isAutomatic:true,
-      description: question
+      isAutomatic: true,
+      description: question,
     };
     Topic.create(topic, function(err, dataTopic) {
       var enigmeToCreate = {
@@ -151,61 +150,68 @@ module.exports = function(Enigme) {
     const user = userId ? 'user#' + userId : '<anonymous>';
     UserEnigmator.findById(userId, {}, function(err, user) {
       // TODO RESTRICT USER
-      /* if(user.role==='ADMIN'){
-
-      } */
-      Enigme.findById(id, {}, function(err, enigme) {
-        var enigmeBuffer = JSON.parse(JSON.stringify(enigme));
-        enigmeBuffer.status = true;
-        delete enigmeBuffer.id;
-        console.log(enigmeBuffer);
-        Enigme.replaceById(id,
-          enigmeBuffer,
-          function(err, data) {
-            if (err)
-              callback(err);
-            else {
-              console.log(data);
-              var result = {
-                message: 'enigme validated ! ',
-              };
-              callback(null, result);
-            }
-          });
-      });
+      if (user.validator === true) {
+        Enigme.findById(id, {}, function(err, enigme) {
+          var enigmeBuffer = JSON.parse(JSON.stringify(enigme));
+          enigmeBuffer.status = true;
+          delete enigmeBuffer.id;
+          console.log(enigmeBuffer);
+          Enigme.replaceById(id,
+            enigmeBuffer,
+            function(err, data) {
+              if (err)
+                callback(err);
+              else {
+                console.log(data);
+                var result = {
+                  message: 'enigme validated ! ',
+                };
+                callback(null, result);
+              }
+            });
+        });
+      } else {
+        var error = {
+          message: "vous n'avez pas les droits",
+          statusCode: 401,
+        };
+        callback(error);
+      }
     });
   };
   Enigme.prototype.RefuseEnigme = function(id, options, callback) {
     var now = new Date();
     var app = Enigme.app;
+    var Topic = app.models.Topic;
     var UserEnigmator = app.models.UserEnigmator;
     const token = options && options.accessToken;
     const userId = token && token.userId;
     const user = userId ? 'user#' + userId : '<anonymous>';
+
     UserEnigmator.findById(userId, {}, function(err, user) {
       // TODO RESTRICT USER
-      /* if(user.role==='ADMIN'){
+      if (user.validator === true) {
+        Enigme.findById(id, {}, function(err, enigme) {
+          if (enigme.status === false) {
+            Topic.destroyById(enigme.topicId);
+            Enigme.destroyById(id);
 
-      } */
-      Enigme.findById(id, {}, function(err, enigme) {
-        var enigmeBuffer = JSON.parse(JSON.stringify(enigme));
-        enigmeBuffer.status = false;
-        delete enigmeBuffer.id;
-        console.log(enigmeBuffer);
-        Enigme.replaceById(id,
-          enigmeBuffer,
-          function(err, data) {
-            if (err)
-              callback(err);
-            else {
-              console.log(data);
-              var result = {
-                message: 'enigme refused ! ',
-              };
-              callback(null, result);
-            }
-          });
-      });
+            callback(null, {});
+          } else {
+            var error1 = {
+              message: "cette énigme a déja été acceptée",
+              statusCode: 405,
+            };
+            callback(error1);
+          }
+        });
+      } else {
+        var error = {
+          message: "vous n'avez pas les droits",
+          statusCode: 401,
+        };
+        callback(error);
+      }
     });
   };
 

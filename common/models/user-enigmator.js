@@ -495,6 +495,7 @@ module.exports = function(Userenigmator) {
     Container.upload(req, res, {container: 'profile'}, function(err, data) {
       console.log(data);
       if (err) {
+        callback(err);
       } else {
         var namefile = data.files.file[0].name;
           Userenigmator.findById(userId, {}, function(err, userData) {
